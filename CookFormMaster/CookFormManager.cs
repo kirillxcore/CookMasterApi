@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Threading;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
@@ -15,13 +16,24 @@ namespace CookFormMaster
         static string[] Scopes = { "https://www.googleapis.com/auth/forms", "https://www.googleapis.com/auth/script.external_request", "https://www.googleapis.com/auth/script.send_mail" };
         static string ApplicationName = "Google Apps Script Execution API";
 
-        public void Test()
+        public static Stream GenerateStreamFromString(string s)
         {
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
+
+        public string Test()
+        {
+            StringBuilder result = new StringBuilder("");
 
             UserCredential credential;
 
             using (var stream =
-                new FileStream(@"C:\projects\my\CookMasterApi\client_secret.json", FileMode.Open, FileAccess.Read))
+                GenerateStreamFromString(@"{""web"":{""client_id"":""224579463826 - 1ggal5bqaiakm04fpdugmh32s0eodvrq.apps.googleusercontent.com"",""project_id"":""project - id - 3437069574526953875"",""auth_uri"":""https://accounts.google.com/o/oauth2/auth"",""token_uri"":""https://accounts.google.com/o/oauth2/token"",""auth_provider_x509_cert_url"":""https://www.googleapis.com/oauth2/v1/certs"",""client_secret"":""D41d0xxdcnFB7kESJQ8685sb"",""redirect_uris"":[""http://cookmaster.apphb.com"",""http://localhost:61698""]}}"))
             {
                 string credPath = System.Environment.GetFolderPath(
                     System.Environment.SpecialFolder.Personal);
@@ -188,21 +200,17 @@ namespace CookFormMaster
                     // a JSON JArray allows the trace elements to be accessed
                     // directly.
                     IDictionary<string, object> error = op.Error.Details[0];
-                    Console.WriteLine(
-                            "Script error message: {0}", error["errorMessage"]);
+                   result.AppendLine($"Script error message: {error["errorMessage"]}");
                     if (error["scriptStackTraceElements"] != null)
                     {
                         // There may not be a stacktrace if the script didn't
                         // start executing.
-                        Console.WriteLine("Script error stacktrace:");
+                        result.AppendLine("Script error stacktrace:");
                         Newtonsoft.Json.Linq.JArray st =
                             (Newtonsoft.Json.Linq.JArray)error["scriptStackTraceElements"];
                         foreach (var trace in st)
                         {
-                            Console.WriteLine(
-                                    "\t{0}: {1}",
-                                    trace["function"],
-                                    trace["lineNumber"]);
+                            result.AppendLine($"\t{trace["function"]}: {trace["lineNumber"]}");
                         }
                     }
                 }
@@ -214,18 +222,20 @@ namespace CookFormMaster
                     // an Apps Script Object with String keys and values.
                     // It is most convenient to cast the return value as a JSON
                     // JObject (folderSet).
-                    var result = op.Response["result"];
+                    var resp = op.Response["result"];
 
-                    Console.WriteLine("Result: " + result);
+                   result.AppendLine("Result: " + resp);
                 }
             }
             catch (Google.GoogleApiException e)
             {
                 // The API encountered a problem before the script
                 // started executing.
-                Console.WriteLine("Error calling API:\n{0}", e);
+                result.AppendLine($"Error calling API:\n{e}");
             }
             //Console.Read();
+
+            return result.ToString();
         }
     }
 }
