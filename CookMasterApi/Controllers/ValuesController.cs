@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using CookFormMaster;
 
 namespace CookMasterApi.Controllers
 {
@@ -18,6 +19,8 @@ namespace CookMasterApi.Controllers
         // GET api/values/5
         public string Get(int id)
         {
+            CookFormManager cookFormManager = new CookFormManager();
+            cookFormManager.Test();
             return "Hello ;)";
         }
 
