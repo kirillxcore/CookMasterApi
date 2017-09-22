@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using Google.Apis.Auth.OAuth2;
+using Google.Apis.Auth.OAuth2.Flows;
+using Google.Apis.Auth.OAuth2.Web;
 using Google.Apis.Services;
 using Google.Apis.Script.v1;
 using Google.Apis.Script.v1.Data;
@@ -30,35 +33,22 @@ namespace CookFormMaster
         {
             StringBuilder result = new StringBuilder("");
 
-            UserCredential credential;
+            String serviceAccountEmail = "cookmaster@project-id-3437069574526953875.iam.gserviceaccount.com";
 
-            using (var stream =
-                GenerateStreamFromString(@"{""web"":{""client_id"":""224579463826 - 1ggal5bqaiakm04fpdugmh32s0eodvrq.apps.googleusercontent.com"",""project_id"":""project - id - 3437069574526953875"",""auth_uri"":""https://accounts.google.com/o/oauth2/auth"",""token_uri"":""https://accounts.google.com/o/oauth2/token"",""auth_provider_x509_cert_url"":""https://www.googleapis.com/oauth2/v1/certs"",""client_secret"":""D41d0xxdcnFB7kESJQ8685sb"",""redirect_uris"":[""http://cookmaster.apphb.com"",""http://localhost:61698""]}}"))
-            {
-                string credPath = System.Environment.GetFolderPath(
-                    System.Environment.SpecialFolder.Personal);
-                credPath = Path.Combine(credPath, ".credentials/script-dotnet.json");
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets,
-                    Scopes,
-                    "user",
-                    CancellationToken.None,
-                    new FileDataStore(credPath, true)).Result;
-                Console.WriteLine("Credential file saved to: " + credPath);
-            }
+            var certificate = new X509Certificate2(@"C:\projects\my\CookMasterApi\cook.p12", "notasecret", X509KeyStorageFlags.Exportable);
+
+            ServiceAccountCredential credential = new ServiceAccountCredential(
+                new ServiceAccountCredential.Initializer(serviceAccountEmail)
+                {
+                    Scopes = Scopes
+                }.FromCertificate(certificate));
+
 
             var service = new ScriptService(new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = ApplicationName,
-            });
-
-/*            var service = new ScriptService(new BaseClientService.Initializer
-            {
-                ApiKey = "AIzaSyCPPitzuI4IfooC9kyZ-dj8uTtQwwOukhA",
-                ApplicationName = "qwe"
-            });*/
-
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = ApplicationName,
+                });
 
             var email = "dmitry.aliskerov@gmail.com, kirillxcore@mail.ru";
             var configuration = @"
@@ -176,6 +166,7 @@ namespace CookFormMaster
             ExecutionRequest request = new ExecutionRequest();
             request.Function = "createForm";
             request.Parameters = new List<object> { email, configuration };
+            request.DevMode = false;
             //			request.Function = "responseForm";
             //			request.Parameters = new List<object> { "1JE3w1CZDUfqocGX5k-opTSA07Ykr52o1cI5pFezi-54" };
 
