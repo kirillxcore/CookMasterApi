@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookFormMaster", "CookFormM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookTests", "CookTests\CookTests.csproj", "{2B2F0839-4DD4-4A4A-8BD2-8A8C6D72D6C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookRepository", "CookRepository\CookRepository.csproj", "{B9066491-8D4F-4C06-B6A1-9795253C9D00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookData", "CookData\CookData.csproj", "{E5ECE5B5-534E-465E-9139-C96EA8E2A62E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{2B2F0839-4DD4-4A4A-8BD2-8A8C6D72D6C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B2F0839-4DD4-4A4A-8BD2-8A8C6D72D6C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B2F0839-4DD4-4A4A-8BD2-8A8C6D72D6C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9066491-8D4F-4C06-B6A1-9795253C9D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9066491-8D4F-4C06-B6A1-9795253C9D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9066491-8D4F-4C06-B6A1-9795253C9D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9066491-8D4F-4C06-B6A1-9795253C9D00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5ECE5B5-534E-465E-9139-C96EA8E2A62E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5ECE5B5-534E-465E-9139-C96EA8E2A62E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5ECE5B5-534E-465E-9139-C96EA8E2A62E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5ECE5B5-534E-465E-9139-C96EA8E2A62E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

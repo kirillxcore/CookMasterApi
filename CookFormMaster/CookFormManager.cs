@@ -4,6 +4,7 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
+using CookFormMaster.Models;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Web;
@@ -11,6 +12,7 @@ using Google.Apis.Services;
 using Google.Apis.Script.v1;
 using Google.Apis.Script.v1.Data;
 using Google.Apis.Util.Store;
+using Newtonsoft.Json;
 
 namespace CookFormMaster
 {
@@ -29,10 +31,8 @@ namespace CookFormMaster
             return stream;
         }
 
-        public string Test()
+        private ScriptService GetScriptServiceP12()
         {
-            StringBuilder result = new StringBuilder("");
-
             String serviceAccountEmail = "cookmaster@project-id-3437069574526953875.iam.gserviceaccount.com";
 
             var certificate = new X509Certificate2(@"C:\projects\my\CookMasterApi\cook.p12", "notasecret", X509KeyStorageFlags.Exportable);
@@ -43,14 +43,51 @@ namespace CookFormMaster
                     Scopes = Scopes
                 }.FromCertificate(certificate));
 
-
             var service = new ScriptService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = ApplicationName,
+            });
+
+            return service;
+        }
+
+        private ScriptService GetScriptServiceUserOAuth()
+        {
+            using (var stream =
+                new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
+            {
+                string credPath = System.Environment.GetFolderPath(
+                    System.Environment.SpecialFolder.Personal);
+                credPath = Path.Combine(credPath, ".credentials/script-dotnet.json");
+
+                UserCredential credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    GoogleClientSecrets.Load(stream).Secrets,
+                    Scopes,
+                    "user",
+                    CancellationToken.None,
+                    new FileDataStore(credPath, true)).Result;
+                Console.WriteLine("Credential file saved to: " + credPath);
+
+               return new ScriptService(new BaseClientService.Initializer()
                 {
                     HttpClientInitializer = credential,
                     ApplicationName = ApplicationName,
                 });
+            }
+        }
+
+        public string Test()
+        {
+            StringBuilder result = new StringBuilder("");
+
+            var service = GetScriptServiceP12(); //GetScriptServiceUserOAuth();
 
             var email = "dmitry.aliskerov@gmail.com, kirillxcore@mail.ru";
+
+            var menu = new Menu();
+            var menuJson = JsonConvert.SerializeObject(menu);
+
             var configuration = @"
 {
   ""title"": ""Меню на выбор"",

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CookFormMaster;
+using CookRepository;
 using NUnit.Framework;
 
 namespace CookTests
@@ -15,6 +16,13 @@ namespace CookTests
         {
             CookFormManager cookFormManager = new CookFormManager();
             cookFormManager.Test();
+        }
+
+        [Test]
+        public void DbTest()
+        {
+            DbService dbService = new DbService();
+            var cooker = dbService.GetCooker(1);
         }
     }
 }

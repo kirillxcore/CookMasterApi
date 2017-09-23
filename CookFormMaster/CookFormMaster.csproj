@@ -63,6 +63,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CookFormManager.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Dish.cs" />
+    <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\MenuDay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
