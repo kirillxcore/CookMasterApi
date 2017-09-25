@@ -10,16 +10,16 @@ using Google.Apis.Auth.OAuth2.Mvc;
 
 namespace CookMasterApi.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AsyncController
     {
-        public ActionResult Index()
+     /*   public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
 
             return View();
         }
-
-        public async Task<ActionResult> IndexAsync(CancellationToken cancellationToken)
+*/
+        public async Task<ActionResult> Index(CancellationToken cancellationToken)
         {
             var result = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).
                 AuthorizeAsync(cancellationToken);
