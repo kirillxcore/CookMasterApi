@@ -24,15 +24,18 @@ namespace CookMasterApi.Controllers
             var result = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).
                 AuthorizeAsync(cancellationToken);
 
-            if (result.Credential != null)
+	        return View("Index");
+
+			if (result.Credential != null)
             {
                 CookFormManager cookFormManager = new CookFormManager();
                 cookFormManager.SetScriptService(result.Credential);
 
-                cookFormManager.Test();
 
-                return View("Index");
-            }
+				ViewBag.Message =  cookFormManager.Test();
+
+
+			}
             else
             {
                 return new RedirectResult(result.RedirectUri);
