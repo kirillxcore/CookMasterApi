@@ -73,6 +73,8 @@ namespace CookMasterApi.Controllers
             var result = await new MyAuthorizationCodeMvcApp(this, new AppFlowMetadata()).
                 AuthorizeAsync(cancellationToken);
 
+	        return View("Index");
+
 			if (result.Credential != null)
             {
                 CookFormManager cookFormManager = new CookFormManager();
