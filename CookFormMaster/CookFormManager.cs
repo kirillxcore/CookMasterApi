@@ -6,8 +6,6 @@ using System.Text;
 using System.Threading;
 using CookFormMaster.Models;
 using Google.Apis.Auth.OAuth2;
-using Google.Apis.Auth.OAuth2.Flows;
-using Google.Apis.Auth.OAuth2.Web;
 using Google.Apis.Services;
 using Google.Apis.Script.v1;
 using Google.Apis.Script.v1.Data;
@@ -20,6 +18,8 @@ namespace CookFormMaster
     {
         static string[] Scopes = { "https://www.googleapis.com/auth/forms", "https://www.googleapis.com/auth/script.external_request", "https://www.googleapis.com/auth/script.send_mail" };
         static string ApplicationName = "Google Apps Script Execution API";
+
+        public ScriptService ScriptService = null;
 
         public static Stream GenerateStreamFromString(string s)
         {
@@ -77,11 +77,23 @@ namespace CookFormMaster
             }
         }
 
+        public void SetScriptService(UserCredential credential)
+        {
+            ScriptService = new ScriptService(new BaseClientService.Initializer
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = "ASP.NET MVC Sample"
+            });
+        }
+
         public string Test()
         {
             StringBuilder result = new StringBuilder("");
 
-            var service = GetScriptServiceP12(); //GetScriptServiceUserOAuth();
+            if (ScriptService == null)
+            {
+                ScriptService = GetScriptServiceP12(); //GetScriptServiceUserOAuth();
+            }
 
             var email = "dmitry.aliskerov@gmail.com, kirillxcore@mail.ru";
 
@@ -210,7 +222,7 @@ namespace CookFormMaster
             string scriptId = "1Z5fyqL4fmoPiCVHUB08Y1ZF39yTdgFMahiBagmraiT7QjZILcUUwo3t-";
 
             ScriptsResource.RunRequest runReq =
-                    service.Scripts.Run(request, scriptId);
+                ScriptService.Scripts.Run(request, scriptId);
 
             try
             {

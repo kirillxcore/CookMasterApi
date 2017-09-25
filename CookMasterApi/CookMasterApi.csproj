@@ -45,12 +45,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.Apis, Version=1.29.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.29.1\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.29.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.29.1\lib\net45\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.Mvc, Version=1.29.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.Mvc.1.29.1\lib\net45\Google.Apis.Auth.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.29.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.29.1\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.29.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.29.1\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.29.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.29.1\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -149,6 +166,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AuthCallbackController.cs" />
     <Compile Include="Controllers\CookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -190,6 +208,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\AuthCallback\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
