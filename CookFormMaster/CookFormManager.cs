@@ -95,7 +95,7 @@ namespace CookFormMaster
                 ScriptService = GetScriptServiceP12(); //GetScriptServiceUserOAuth();
             }
 
-            var email = "dmitry.aliskerov@gmail.com, kirillxcore@mail.ru";
+            var email = "dmitry.aliskerov@gmail.com, kirillxcore@mail.ru, cookmaster2018@gmail.com";
 
             var menu = new Menu();
             var menuJson = JsonConvert.SerializeObject(menu);
@@ -206,9 +206,10 @@ namespace CookFormMaster
       ]
     }
   ],
-  ""wishes"": [
-    ""Больше мяса"", ""Больше сладкого""
-  ]
+  ""wishes"": {
+	""title"": ""Пожелания"", 
+	""values"": [""Больше мяса"", ""Больше сладкого"" ]
+  }
 }";
 
             // Create an execution request object.

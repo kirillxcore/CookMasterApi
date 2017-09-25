@@ -7,5 +7,6 @@ namespace CookFormMaster.Models
         public string title { get; set; }
         public string description { get; set; }
         public List<MenuDay> days { get; set; }
-    }
+		public Wishes wishes { get; set; }
+	}
 }
