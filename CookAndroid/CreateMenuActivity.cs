@@ -103,12 +103,12 @@ namespace CookAndroid
                 View view = convertView;
                 if (view == null)
                 {
-                    view = context.LayoutInflater.Inflate(Android.Resource.Layout.CreateMenuItem, null);
+                    view = context.LayoutInflater.Inflate(Resource.Layout.CreateMenuItem, null);
                 }
 
-                view.FindViewById<TextView>(Android.Resource.Id.NameText).Text = items[position].Name;
-                view.FindViewById<TextView>(Android.Resource.Id.DescriptionText).Text = items[position].IsVegan ? "Vegan" : "All";
-                view.FindViewById<TextView>(Android.Resource.Id.IsSelected).Text = items[position].IsSelected ? "X" : "-";
+                view.FindViewById<TextView>(Resource.Id.NameText).Text = items[position].Name;
+                view.FindViewById<TextView>(Resource.Id.DescriptionText).Text = items[position].IsVegan ? "Vegan" : "All";
+                view.FindViewById<TextView>(Resource.Id.IsSelected).Text = items[position].IsSelected ? "X" : "-";
                 return view;
             }
         }
