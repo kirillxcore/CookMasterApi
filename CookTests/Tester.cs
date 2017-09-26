@@ -22,7 +22,7 @@ namespace CookTests
         public void DbTest()
         {
             DbService dbService = new DbService();
-            var cooker = dbService.GetCooker(1);
+            var dishes = dbService.GetDishes();
         }
     }
 }

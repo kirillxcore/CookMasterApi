@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CookData;
+using CookMasterApiModel;
 using Dapper;
 
 namespace CookRepository
@@ -13,9 +10,9 @@ namespace CookRepository
     public class DbService
     {
         private const string DatabaseConnectionString =
-                "Server=78624758-8105-4602-a6ab-a7f5004d5221.sqlserver.sequelizer.com;Database=db7862475881054602a6aba7f5004d5221;User ID=qjhmazuiieodsobo;Password=MyQYq4CaamriviQPATSvVNbXdft32yoeD4KocMBT3pCXKM7jB3P7XPV8x2VjJJhJ;";
+                "Server=192.168.50.39;Database=CookMaster;User ID=sa;Password=qwe123;";
 
-        public Cooker GetCooker(int id)
+/*        public Cooker GetCooker(int id)
         {
             using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
             {
@@ -35,6 +32,23 @@ namespace CookRepository
                 }).ToList();
 
                 return cooker;
+            }
+        }*/
+
+        public List<DishItem> GetDishes()
+        {
+            using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
+            {
+                var cookerQuery = db.Query("SELECT * FROM Dishes");
+                return cookerQuery.Select(x => new DishItem()
+                {
+                    Id = x.id.ToString(),
+                    Name = x.title,
+                    ImageUrl = x.image,
+                    IsVegan = false,
+                    CategoryId = x.category_id
+                }).ToList();
+
             }
         }
     }

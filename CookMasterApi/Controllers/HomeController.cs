@@ -8,13 +8,6 @@ namespace CookMasterApi.Controllers
 {
 	public class HomeController : AsyncController
     {
-     /*   public ActionResult Index()
-        {
-            ViewBag.Title = "Home Page";
-
-            return View();
-        }
-*/
         public async Task<ActionResult> Index(CancellationToken cancellationToken)
         {
             var result = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).

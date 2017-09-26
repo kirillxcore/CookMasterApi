@@ -207,7 +207,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\AuthCallback\" />
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +228,14 @@
     <ProjectReference Include="..\CookFormMaster\CookFormMaster.csproj">
       <Project>{FC28CF8C-CE29-461A-91AE-FB8F3AA2DF7E}</Project>
       <Name>CookFormMaster</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CookMasterApiModel\CookMasterApiModel.csproj">
+      <Project>{f8e62ba3-f374-4edf-8c84-1ca8aa1d0ca4}</Project>
+      <Name>CookMasterApiModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CookRepository\CookRepository.csproj">
+      <Project>{b9066491-8d4f-4c06-b6a1-9795253c9d00}</Project>
+      <Name>CookRepository</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

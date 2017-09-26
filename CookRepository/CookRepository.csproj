@@ -50,9 +50,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CookData\CookData.csproj">
-      <Project>{E5ECE5B5-534E-465E-9139-C96EA8E2A62E}</Project>
-      <Name>CookData</Name>
+    <ProjectReference Include="..\CookMasterApiModel\CookMasterApiModel.csproj">
+      <Project>{f8e62ba3-f374-4edf-8c84-1ca8aa1d0ca4}</Project>
+      <Name>CookMasterApiModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
