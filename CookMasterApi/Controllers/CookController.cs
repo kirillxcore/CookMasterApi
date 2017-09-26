@@ -5,11 +5,48 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CookFormMaster;
+using CookMasterApi.Models;
 
 namespace CookMasterApi.Controllers
 {
     public class CookController : ApiController
     {
+        [HttpPost]
+        [ActionName("Login")]
+        public HttpResponseMessage Login([FromBody] LoginRequest request)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        [ActionName("Publish")]
+        public HttpResponseMessage Publish([FromBody] PublishRequest request)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        [ActionName("Stat")]
+        public HttpResponseMessage Stat(int days)
+        {
+            StatResponse response = new StatResponse();
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        [ActionName("Dishes")]
+        public HttpResponseMessage Dishes()
+        {
+            DishesResponse response = new DishesResponse();
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
         // GET: api/Cook
         public string Get()
         {

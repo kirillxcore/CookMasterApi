@@ -109,6 +109,7 @@
     <Compile Include="Models\Dish.cs" />
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\MenuDay.cs" />
+    <Compile Include="Models\Wishes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
