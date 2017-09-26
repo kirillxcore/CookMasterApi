@@ -187,8 +187,8 @@ namespace CookFormMaster
 			request.Function = "createForm";
 			request.Parameters = new List<object> { email, menuJson };
 			request.DevMode = false;
-			//			request.Function = "responseForm";
-			//			request.Parameters = new List<object> { "1JE3w1CZDUfqocGX5k-opTSA07Ykr52o1cI5pFezi-54" };
+//			request.Function = "responseForm";
+//			request.Parameters = new List<object> { "1rf3yqN-ER5wH-tznHri_8RmqovHKXhnh7FUd6fROWdQ" };
 
 			string scriptId = "1s65xtr2aqSWhWRWU4xUT3CPX2S5jqvYhoiO5olF2st-9FuhZO8a9rhi6";
 
@@ -196,7 +196,7 @@ namespace CookFormMaster
 
 			try
 			{
-				Operation op = runReq.Execute();
+				var op = runReq.Execute();
 
 				if (op.Error != null)
 				{
@@ -217,9 +217,9 @@ namespace CookFormMaster
 				}
 				else
 				{
-					var resp = op.Response["result"];
+					var resultJson = op.Response["result"].ToString();
 
-					result.AppendLine("Result: " + resp);
+					var formResponses = JsonConvert.DeserializeObject<IList<FormResponse>>(resultJson);
 				}
 			}
 			catch (Google.GoogleApiException e)
