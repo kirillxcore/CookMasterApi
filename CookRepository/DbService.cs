@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -48,6 +49,40 @@ namespace CookRepository
                     IsVegan = false,
                     CategoryId = x.category_id
                 }).ToList();
+
+            }
+        }
+
+        public Cooker GetCooker(string login, string password)
+        {
+            using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
+            {
+                var cookerQuery = db.Query($"SELECT * FROM Cooker WHERE login={login} AND password={password}");
+                return cookerQuery.Select(x => new Cooker
+                {
+                    Id = x.id,
+                    Name = x.name,
+                    Login = x.login,
+                    Password = x.password,
+                    Token = x.token
+                }).FirstOrDefault();
+
+            }
+        }
+
+        public Cooker GetCookerbyId(int id)
+        {
+            using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
+            {
+                var cookerQuery = db.Query($"SELECT * FROM Cooker WHERE id={id}");
+                return cookerQuery.Select(x => new Cooker
+                {
+                    Id = x.id,
+                    Name = x.name,
+                    Login = x.login,
+                    Password = x.password,
+                    Token = x.token
+                }).FirstOrDefault();
 
             }
         }

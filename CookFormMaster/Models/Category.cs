@@ -2,9 +2,10 @@
 
 namespace CookFormMaster.Models
 {
-    public class Category
-    {
-        public string title { get; set; }
-        public List<Dish> dishes { get; set; }
-    }
+	public class Category
+	{
+		public string Title { get; set; }
+
+		public List<Dish> Dishes { get; set; }
+	}
 }

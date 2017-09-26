@@ -9,7 +9,7 @@ namespace CookAndroid.Repo
         {
             var request = new LoginRequest
             {
-                Name = name,
+                Login = name,
                 Password = password
             };
 

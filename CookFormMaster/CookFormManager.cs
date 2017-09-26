@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading;
 using CookFormMaster.Models;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.Script.v1;
 using Google.Apis.Script.v1.Data;
-using Google.Apis.Util.Store;
 using Newtonsoft.Json;
 
 namespace CookFormMaster
@@ -37,69 +32,75 @@ namespace CookFormMaster
 
 			var menu = new Menu
 			{
-				title = "Меню на выбор",
-				description = "Повар: Иванова Т.И.",
-				days = new List<MenuDay>
+				Title = "Меню на выбор",
+				Description = "Повар: Иванова Т.И.",
+				Days = new List<MenuDay>
 				{
 					new MenuDay
 					{
-						title = "Понедельник, 17.09.2017",
-						categories = new List<Category>
+						Title = "Понедельник, 17.09.2017",
+						Categories = new List<Category>
 						{
 							new Category
 							{
-								title = "Супы",
-								dishes = new List<Dish>
+								Title = "Супы",
+								Dishes = new List<Dish>
 								{
 									new Dish
 									{
-										title = "Куриный суп с яйцом",
-										description = "Быстрый и вкусный куриный суп с яйцом. Прекрасно подойдет к обеденному столу.",
-										image = "https://kedem.ru/photo/recipe/rnamebig/kurinyj-sup-s-yajcom.jpg"
+										Id = 1,
+										Title = "Куриный суп с яйцом",
+										Description = "Быстрый и вкусный куриный суп с яйцом. Прекрасно подойдет к обеденному столу.",
+										Image = "https://kedem.ru/photo/recipe/rnamebig/kurinyj-sup-s-yajcom.jpg"
 									},
 									new Dish
 									{
-										title = "Грибной суп",
-										description = "Ароматный, вкусный и легкий грибной суп приятно разнообразит ваше повседневное меню.",
-										image = "https://kedem.ru/photo/recipe/rnamebig/gribnoj-sup.jpg"
+										Id = 4,
+										Title = "Грибной суп",
+										Description = "Ароматный, вкусный и легкий грибной суп приятно разнообразит ваше повседневное меню.",
+										Image = "https://kedem.ru/photo/recipe/rnamebig/gribnoj-sup.jpg"
 									}
 								}
 							},
 							new Category
 							{
-								title = "Второе",
-								dishes = new List<Dish>
+								Title = "Второе",
+								Dishes = new List<Dish>
 								{
 									new Dish
 									{
-										title = "Картофель тушеный с белыми грибами",
-										description = "Гадаете, что бы такого вкусного приготовить? Тогда картофель тушеный с белыми грибами как раз для вас.",
-										image = "https://kedem.ru/photo/recipe/rnamebig/kartofel-tushenyj-s-belymi-gribami.jpg"
+										Id = 7,
+										Title = "Картофель тушеный с белыми грибами",
+										Description = "Гадаете, что бы такого вкусного приготовить? Тогда картофель тушеный с белыми грибами как раз для вас.",
+										Image = "https://kedem.ru/photo/recipe/rnamebig/kartofel-tushenyj-s-belymi-gribami.jpg"
 									},
 									new Dish
 									{
-										title = "Картофельные драники 'Улётные'",
-										description = "Одно из самых популярных блюд, которое любят в каждой семье. Румяные, с золотистой корочкой картофельные драники со сметанкой... Ммм...",
-										image = "https://kedem.ru/photo/recipe/rnamebig/kartofelnye-draniki-ulyotnye.jpg"
+										Id = 8,
+										Title = "Картофельные драники 'Улётные'",
+										Description = "Одно из самых популярных блюд, которое любят в каждой семье. Румяные, с золотистой корочкой картофельные драники со сметанкой... Ммм...",
+										Image = "https://kedem.ru/photo/recipe/rnamebig/kartofelnye-draniki-ulyotnye.jpg"
 									}
 								}
 							},
 							new Category
 							{
-								title = "Салат",
-								dishes = new List<Dish>
+								Title = "Салат",
+								Dishes = new List<Dish>
 								{
 									new Dish
 									{
-										title = "Салат с маринованными грибами 'Венгерка'",
-										description = "Салат с маринованными грибами «Венгерка», это очаровательный салат с грибами и маслинами, который понравится вашим гостям.",
-										image = "https://kedem.ru/photo/recipe/rnamebig/salat-s-marinovannymi-gribami-vengerka.jpg"
+										Id = 15,
+										Title = "Салат с маринованными грибами 'Венгерка'",
+										Description = "Салат с маринованными грибами «Венгерка», это очаровательный салат с грибами и маслинами, который понравится вашим гостям.",
+										Image = "https://kedem.ru/photo/recipe/rnamebig/salat-s-marinovannymi-gribami-vengerka.jpg"
 									},
 									new Dish
 									{
-										title = "Закуска 'Оливье-рулет'",
-										description = "'Оливье - рулет' прекрасная закуска-салат для новогоднего стола, точно не останется до конца праздника.",
-										image = "https://kedem.ru/photo/recipe/rnamebig/zakuska-olive-rulet.jpg"
+										Id = 16,
+										Title = "Закуска 'Оливье-рулет'",
+										Description = "'Оливье - рулет' прекрасная закуска-салат для новогоднего стола, точно не останется до конца праздника.",
+										Image = "https://kedem.ru/photo/recipe/rnamebig/zakuska-olive-rulet.jpg"
 									}
 								}
 							}
@@ -107,73 +108,79 @@ namespace CookFormMaster
 					},
 					new MenuDay
 					{
-						title = "Вторник, 18.09.2017",
-						categories = new List<Category>
+						Title = "Вторник, 18.09.2017",
+						Categories = new List<Category>
 						{
 							new Category
 							{
-								title = "Супы",
-								dishes = new List<Dish>
+								Title = "Супы",
+								Dishes = new List<Dish>
 								{
 									new Dish
 									{
-										title ="Тыквенный суп-пюре",
-										description = "Самый быстрый и вкусный тыквенный суп-пюре с овощами на курином бульоне.",
-										image = "https://kedem.ru/photo/recipe/rnamebig/tykvennyj-sup-pyure-za-10-minut.jpg"
+										Id = 5,
+										Title ="Тыквенный суп-пюре",
+										Description = "Самый быстрый и вкусный тыквенный суп-пюре с овощами на курином бульоне.",
+										Image = "https://kedem.ru/photo/recipe/rnamebig/tykvennyj-sup-pyure-za-10-minut.jpg"
 									},
 									new Dish
 									{
-										title = "Свекольник домашний",
-										description = "Свекольник домашний, аппетитный и вкусный постный суп, который можно готовить хоть каждый день.",
-										image = "https://kedem.ru/photo/recipe/rnamebig/svekolnik-domashnij.jpg"
+										Id = 6,
+										Title = "Свекольник домашний",
+										Description = "Свекольник домашний, аппетитный и вкусный постный суп, который можно готовить хоть каждый день.",
+										Image = "https://kedem.ru/photo/recipe/rnamebig/svekolnik-domashnij.jpg"
 									}
 								}
 							},
 							new Category
 							{
-								title = "Второе",
-								dishes = new List<Dish>
+								Title = "Второе",
+								Dishes = new List<Dish>
 								{
 									new Dish
 									{
-										title = "Тушеное мясо в горшочке",
-										description = "Нежное тушеное мясо в горшочке, пропитанное ароматами овощей и приправ, порадует своим вкусом вас и ваших близких.",
-										image = "https://kedem.ru/photo/recipe/rnamebig/tushenoe-myaso-v-gorshochke.jpg"
+										Id = 9,
+										Title = "Тушеное мясо в горшочке",
+										Description = "Нежное тушеное мясо в горшочке, пропитанное ароматами овощей и приправ, порадует своим вкусом вас и ваших близких.",
+										Image = "https://kedem.ru/photo/recipe/rnamebig/tushenoe-myaso-v-gorshochke.jpg"
 									},
 									new Dish
 									{
-										title = "Перец в духовке с сыром и яйцом",
-										description = "Необычный рецепт фаршированного перца с сыром и яйцом, запеченного в духовке отлично подойдет как для вкусного завтрака, так и для легкого ужина.Простой в приготовлении, он займет совсем немного времени.",
-										image = "https://kedem.ru/photo/recipe/rnamebig/perec-v-duhovke-s-syrom-i-yajcom.jpg"
+										Id = 10,
+										Title = "Перец в духовке с сыром и яйцом",
+										Description = "Необычный рецепт фаршированного перца с сыром и яйцом, запеченного в духовке отлично подойдет как для вкусного завтрака, так и для легкого ужина.Простой в приготовлении, он займет совсем немного времени.",
+										Image = "https://kedem.ru/photo/recipe/rnamebig/perec-v-duhovke-s-syrom-i-yajcom.jpg"
 									}
 								}
 							},
 							new Category
 							{
-								title = "Выпечка",
-								dishes = new List<Dish>
+								Title = "Выпечка",
+								Dishes = new List<Dish>
 								{
 									new Dish
 									{
-										title = "Шарлотка с яблоками",
-										description = "Хотите наполнить дом теплом и уютом? Тогда самое время приготовить Шарлотку! Шарлотка из зеленых сочных яблок не оставит равнодушным никого.",
-										image = "https://kedem.ru/photo/recipe/rnamebig/sharlotka-s-yablokami.jpg"
+										Id = 11,
+										Title = "Шарлотка с яблоками",
+										Description = "Хотите наполнить дом теплом и уютом? Тогда самое время приготовить Шарлотку! Шарлотка из зеленых сочных яблок не оставит равнодушным никого.",
+										Image = "https://kedem.ru/photo/recipe/rnamebig/sharlotka-s-yablokami.jpg"
 									},
 									new Dish
 									{
-										title = "Мини-пиццы",
-										description = "Эти маленькие, аппетитные и очень вкусные мини-пиццы станут хитом в любой компании.Лучше приготовить побольше.",
-										image = "https://kedem.ru/photo/recipe/rnamebig/mini-piccy.jpg"
+										Id = 13,
+										Title = "Мини-пиццы",
+										Description = "Эти маленькие, аппетитные и очень вкусные мини-пиццы станут хитом в любой компании.Лучше приготовить побольше.",
+										Image = "https://kedem.ru/photo/recipe/rnamebig/mini-piccy.jpg"
 									}
 								}
 							}
 						}
 					}
 				},
-				wishes = new Wishes
+				Wishes = new Wishes
 				{
-					title = "Пожелания",
-					values = new List<string>
+					Title = "Пожелания",
+					Values = new List<string>
 					{
 						"Больше мяса",
 						"Больше сладкого"
@@ -188,9 +195,9 @@ namespace CookFormMaster
 			request.Parameters = new List<object> { email, menuJson };
 			request.DevMode = false;
 //			request.Function = "responseForm";
-//			request.Parameters = new List<object> { "1rf3yqN-ER5wH-tznHri_8RmqovHKXhnh7FUd6fROWdQ" };
+//			request.Parameters = new List<object> { "1orZ4eKcRjikCGDl5Ms0FwiUSA8WqOVqTNaBrYPA58ec" };
 
-			string scriptId = "1s65xtr2aqSWhWRWU4xUT3CPX2S5jqvYhoiO5olF2st-9FuhZO8a9rhi6";
+			var scriptId = "1s65xtr2aqSWhWRWU4xUT3CPX2S5jqvYhoiO5olF2st-9FuhZO8a9rhi6";
 
 			var runReq = ScriptService.Scripts.Run(request, scriptId);
 
@@ -219,7 +226,8 @@ namespace CookFormMaster
 				{
 					var resultJson = op.Response["result"].ToString();
 
-					var formResponses = JsonConvert.DeserializeObject<IList<FormResponse>>(resultJson);
+					var formCreationResponse = JsonConvert.DeserializeObject<FormCreationResponse>(resultJson);
+//					var formAnswers = JsonConvert.DeserializeObject<IList<FormAnswer>>(resultJson);
 				}
 			}
 			catch (Google.GoogleApiException e)

@@ -107,10 +107,12 @@
     <Compile Include="CookFormManager.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Dish.cs" />
-    <Compile Include="Models\FormResponse.cs" />
-    <Compile Include="Models\FormValue.cs" />
+    <Compile Include="Models\FormAnswer.cs" />
+    <Compile Include="Models\FormAnswerValue.cs" />
+    <Compile Include="Models\FormCreationResponse.cs" />
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\MenuDay.cs" />
+    <Compile Include="Models\RelationBetweenIds.cs" />
     <Compile Include="Models\Wishes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

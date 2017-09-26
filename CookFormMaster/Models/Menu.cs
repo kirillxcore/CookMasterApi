@@ -2,11 +2,14 @@
 
 namespace CookFormMaster.Models
 {
-    public class Menu
-    {
-        public string title { get; set; }
-        public string description { get; set; }
-        public List<MenuDay> days { get; set; }
-		public Wishes wishes { get; set; }
+	public class Menu
+	{
+		public string Title { get; set; }
+
+		public string Description { get; set; }
+
+		public List<MenuDay> Days { get; set; }
+
+		public Wishes Wishes { get; set; }
 	}
 }

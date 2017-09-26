@@ -2,7 +2,7 @@
 
 namespace CookFormMaster.Models
 {
-	public class FormValue
+	public class FormAnswerValue
 	{
 		public int FormId { get; set; }
 
