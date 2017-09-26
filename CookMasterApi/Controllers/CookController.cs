@@ -35,17 +35,17 @@ namespace CookMasterApi.Controllers
             var dishes = _dbService.GetDishes();
             Menu menu = new Menu
             {
-                days = new List<MenuDay> { new MenuDay
+                Days = new List<MenuDay> { new MenuDay
                 {
-                    title = DateTime.Now.Date.AddDays(1).DayOfWeek+' '+DateTime.Now.Date.AddDays(1).ToShortDateString(),
-                    categories = new List<Category>()
+                    Title = DateTime.Now.Date.AddDays(1).DayOfWeek+' '+DateTime.Now.Date.AddDays(1).ToShortDateString(),
+                    Categories = new List<Category>()
                 }},
-                title = "Меню на выбор",
-                description = _dbService.GetCookerbyId(2).Name,
-                wishes = new Wishes
+                Title = "Меню на выбор",
+                Description = _dbService.GetCookerbyId(2).Name,
+                Wishes = new Wishes
                 {
-                    title = "Пожелания",
-                    values = new List<string>
+                    Title = "Пожелания",
+                    Values = new List<string>
                     {
                         "Больше мяса",
                         "Больше сладкого"
