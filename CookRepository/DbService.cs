@@ -13,7 +13,7 @@ namespace CookRepository
     public class DbService
     {
         private const string DatabaseConnectionString =
-                "Server=78624758-8105-4602-a6ab-a7f5004d5221.sqlserver.sequelizer.com;Database=db7862475881054602a6aba7f5004d5221;User ID=qjhmazuiieodsobo;Password=MyQYq4CaamriviQPATSvVNbXdft32yoeD4KocMBT3pCXKM7jB3P7XPV8x2VjJJhJ;";
+                "Server=192.168.50.39;Database=CookMaster;User ID=sa;Password=qwe123;";
 
         public Cooker GetCooker(int id)
         {
