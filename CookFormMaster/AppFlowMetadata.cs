@@ -19,9 +19,9 @@ namespace CookFormMaster
             {
                 ClientSecrets = new ClientSecrets
                 {
-                    ClientId = "224579463826-1ggal5bqaiakm04fpdugmh32s0eodvrq.apps.googleusercontent.com",
-                    ClientSecret = "D41d0xxdcnFB7kESJQ8685sb"
-                },
+                    ClientId = "314052258612-85k1n86fo0mhenv9v4d0sn7ndasd356g.apps.googleusercontent.com",
+                    ClientSecret = "wOgSBbG_JeqSk0aBccll8z1f"
+				},
                 Scopes = Scopes,
                 DataStore = new FileDataStore("Script.Api.Auth.Store")
             });
