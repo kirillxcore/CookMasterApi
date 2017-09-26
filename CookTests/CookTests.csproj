@@ -51,13 +51,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CookData\CookData.csproj">
-      <Project>{E5ECE5B5-534E-465E-9139-C96EA8E2A62E}</Project>
-      <Name>CookData</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CookFormMaster\CookFormMaster.csproj">
       <Project>{FC28CF8C-CE29-461A-91AE-FB8F3AA2DF7E}</Project>
       <Name>CookFormMaster</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CookMasterApiModel\CookMasterApiModel.csproj">
+      <Project>{F8E62BA3-F374-4EDF-8C84-1CA8AA1D0CA4}</Project>
+      <Name>CookMasterApiModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\CookRepository\CookRepository.csproj">
       <Project>{B9066491-8D4F-4C06-B6A1-9795253C9D00}</Project>

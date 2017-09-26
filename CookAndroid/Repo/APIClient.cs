@@ -30,17 +30,20 @@ namespace CookAndroid.Repo
                 new DishItem
                 {
                     Name = "Meat",
-                    IsVegan = false
+                    IsVegan = false,
+                    ImageUrl = "https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
                 },
                 new DishItem
                 {
                     Name = "Salad",
-                    IsVegan = false
+                    IsVegan = false,
+                    ImageUrl = "https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
                 },
                 new DishItem
                 {
                     Name = "Soap",
-                    IsVegan = true
+                    IsVegan = true,
+                    ImageUrl = "https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
                 }
             };
             return response;
@@ -71,7 +74,8 @@ namespace CookAndroid.Repo
                 {
                     Item = new DishItem{
                         Name = "Meat",
-                        IsVegan = true
+                        IsVegan = true,
+                    ImageUrl = "https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
                     },
                     Count = 7
                 },
@@ -79,7 +83,8 @@ namespace CookAndroid.Repo
                 {
                     Item = new DishItem{
                         Name = "Salad",
-                        IsVegan = false
+                        IsVegan = false,
+                    ImageUrl = "https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
                     },
                     Count = 3
                 },
@@ -87,7 +92,8 @@ namespace CookAndroid.Repo
                 {
                     Item = new DishItem{
                         Name = "Soap",
-                        IsVegan = false
+                        IsVegan = false,
+                    ImageUrl = "https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
                     },
                     Count = 5
                 }

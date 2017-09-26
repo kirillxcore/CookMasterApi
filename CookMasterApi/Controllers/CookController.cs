@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using CookFormMaster;
 using CookMasterApiModel;
+using CookRepository;
 
 namespace CookMasterApi.Controllers
 {
@@ -32,19 +33,20 @@ namespace CookMasterApi.Controllers
             StatResponse response = new StatResponse();
 
             return Request.CreateResponse(HttpStatusCode.OK, response);
-
-            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         [HttpPost]
         [ActionName("Dishes")]
         public HttpResponseMessage Dishes()
         {
-            DishesResponse response = new DishesResponse();
+            DbService dbService = new DbService();
+
+            DishesResponse response = new DishesResponse
+            {
+                Dishes = dbService.GetDishes()
+            };
 
             return Request.CreateResponse(HttpStatusCode.OK, response);
-
-            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         // GET: api/Cook

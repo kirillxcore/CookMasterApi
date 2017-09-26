@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using CookMasterApiModel;
 using Android.Views;
 using System.Linq;
+using Android.Net;
 
+[assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 namespace CookAndroid
 {
     [Activity(Label = "Statistic", Theme = "@android:style/Theme.NoTitleBar")]
@@ -23,7 +25,7 @@ namespace CookAndroid
 
             var days = Intent.GetIntExtra("days", 0);
             
-            TextView labelHeader = FindViewById<TextView>(Resource.Id.LabelStatHeader);
+            TextView labelHeader = FindViewById<TextView>(Resource.Id.StatHeader);
             labelHeader.Text = "Statistic for " + days + " days.";
 
 
@@ -36,9 +38,8 @@ namespace CookAndroid
                 Name = a.Item.Name
             }).ToList();
 
-            var menuAvailable = FindViewById<ListView>(Resource.Id.StatAvailable);
+            var menuAvailable = FindViewById<ListView>(Resource.Id.StatList);
             menuAvailable.Adapter = new StatAdapter(this, items);
-            menuAvailable.FastScrollEnabled = true;
         }
 
         public class DishWrapper : DishItem
@@ -80,9 +81,10 @@ namespace CookAndroid
                     view = context.LayoutInflater.Inflate(Resource.Layout.StatItem, null);
                 }
 
-                view.FindViewById<TextView>(Resource.Id.NameStatText).Text = items[position].Name;
-                view.FindViewById<TextView>(Resource.Id.DescriptionStatText).Text = items[position].IsVegan ? "Vegan" : "All";
-                view.FindViewById<TextView>(Resource.Id.CountStatText).Text = items[position].Count.ToString();
+                view.FindViewById<TextView>(Resource.Id.StatItemName).Text = items[position].Name;
+                view.FindViewById<TextView>(Resource.Id.StatItemDescription).Text = items[position].IsVegan ? "Vegan" : "All";
+                view.FindViewById<TextView>(Resource.Id.StatItemCount).Text = items[position].Count.ToString();
+                view.FindViewById<ImageView>(Resource.Id.StatItemImage).SetImageBitmap(ImageDownloader.GetImageBitmapFromUrl(items[position].ImageUrl));
                 return view;
             }
         }

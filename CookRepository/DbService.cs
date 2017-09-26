@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CookData;
+using CookMasterApiModel;
 using Dapper;
 
 namespace CookRepository
@@ -15,7 +12,7 @@ namespace CookRepository
         private const string DatabaseConnectionString =
                 "Server=192.168.50.39;Database=CookMaster;User ID=sa;Password=qwe123;";
 
-        public Cooker GetCooker(int id)
+/*        public Cooker GetCooker(int id)
         {
             using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
             {
@@ -35,6 +32,22 @@ namespace CookRepository
                 }).ToList();
 
                 return cooker;
+            }
+        }*/
+
+        public List<DishItem> GetDishes()
+        {
+            using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
+            {
+                var cookerQuery = db.Query("SELECT * FROM dishes");
+                return cookerQuery.Select(x => new DishItem()
+                {
+                    Id = x.id,
+                    Name = x.title,
+                    ImageUrl = x.image_url,
+                    IsVegan = false
+                }).ToList();
+
             }
         }
     }

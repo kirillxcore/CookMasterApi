@@ -41,59 +41,81 @@ namespace CookAndroid
 			}
 		}
 		
+		public partial class Drawable
+		{
+			
+			// aapt resource value: 0x7f020000
+			public const int ico = 2130837504;
+			
+			static Drawable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Drawable()
+			{
+			}
+		}
+		
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040009
-			public const int ButtonCreateMenu = 2130968585;
+			// aapt resource value: 0x7f050004
+			public const int CreateMenuItemDescription = 2131034116;
 			
-			// aapt resource value: 0x7f040008
-			public const int ButtonLogin = 2130968584;
+			// aapt resource value: 0x7f050002
+			public const int CreateMenuItemImage = 2131034114;
 			
-			// aapt resource value: 0x7f040000
-			public const int ButtonSaveMenu = 2130968576;
+			// aapt resource value: 0x7f050005
+			public const int CreateMenuItemIsSelected = 2131034117;
 			
-			// aapt resource value: 0x7f04000a
-			public const int ButtonViewStatistic = 2130968586;
+			// aapt resource value: 0x7f050003
+			public const int CreateMenuItemName = 2131034115;
 			
-			// aapt resource value: 0x7f04000b
-			public const int ButtonViewWeekStatistic = 2130968587;
+			// aapt resource value: 0x7f050001
+			public const int CreateMenuList = 2131034113;
 			
-			// aapt resource value: 0x7f040010
-			public const int CountStatText = 2130968592;
+			// aapt resource value: 0x7f050000
+			public const int CreateMenuSave = 2131034112;
 			
-			// aapt resource value: 0x7f04000f
-			public const int DescriptionStatText = 2130968591;
+			// aapt resource value: 0x7f050009
+			public const int LoginButton = 2131034121;
 			
-			// aapt resource value: 0x7f040003
-			public const int DescriptionText = 2130968579;
+			// aapt resource value: 0x7f050006
+			public const int LoginError = 2131034118;
 			
-			// aapt resource value: 0x7f040006
-			public const int EditLogin = 2130968582;
+			// aapt resource value: 0x7f050007
+			public const int LoginLogin = 2131034119;
 			
-			// aapt resource value: 0x7f040007
-			public const int EditPassword = 2130968583;
+			// aapt resource value: 0x7f050008
+			public const int LoginPassword = 2131034120;
 			
-			// aapt resource value: 0x7f040004
-			public const int IsSelected = 2130968580;
+			// aapt resource value: 0x7f05000a
+			public const int MainCreateMenu = 2131034122;
 			
-			// aapt resource value: 0x7f040005
-			public const int LabelError = 2130968581;
+			// aapt resource value: 0x7f05000b
+			public const int MainViewStatistic = 2131034123;
 			
-			// aapt resource value: 0x7f04000c
-			public const int LabelStatHeader = 2130968588;
+			// aapt resource value: 0x7f05000c
+			public const int MainViewWeekStatistic = 2131034124;
 			
-			// aapt resource value: 0x7f040001
-			public const int MenuAvailable = 2130968577;
+			// aapt resource value: 0x7f05000d
+			public const int StatHeader = 2131034125;
 			
-			// aapt resource value: 0x7f04000e
-			public const int NameStatText = 2130968590;
+			// aapt resource value: 0x7f050012
+			public const int StatItemCount = 2131034130;
 			
-			// aapt resource value: 0x7f040002
-			public const int NameText = 2130968578;
+			// aapt resource value: 0x7f050011
+			public const int StatItemDescription = 2131034129;
 			
-			// aapt resource value: 0x7f04000d
-			public const int StatAvailable = 2130968589;
+			// aapt resource value: 0x7f05000f
+			public const int StatItemImage = 2131034127;
+			
+			// aapt resource value: 0x7f050010
+			public const int StatItemName = 2131034128;
+			
+			// aapt resource value: 0x7f05000e
+			public const int StatList = 2131034126;
 			
 			static Id()
 			{
@@ -108,23 +130,23 @@ namespace CookAndroid
 		public partial class Layout
 		{
 			
-			// aapt resource value: 0x7f020000
-			public const int CreateMenu = 2130837504;
+			// aapt resource value: 0x7f030000
+			public const int CreateMenu = 2130903040;
 			
-			// aapt resource value: 0x7f020001
-			public const int CreateMenuItem = 2130837505;
+			// aapt resource value: 0x7f030001
+			public const int CreateMenuItem = 2130903041;
 			
-			// aapt resource value: 0x7f020002
-			public const int Login = 2130837506;
+			// aapt resource value: 0x7f030002
+			public const int Login = 2130903042;
 			
-			// aapt resource value: 0x7f020003
-			public const int Main = 2130837507;
+			// aapt resource value: 0x7f030003
+			public const int Main = 2130903043;
 			
-			// aapt resource value: 0x7f020004
-			public const int Stat = 2130837508;
+			// aapt resource value: 0x7f030004
+			public const int Stat = 2130903044;
 			
-			// aapt resource value: 0x7f020005
-			public const int StatItem = 2130837509;
+			// aapt resource value: 0x7f030005
+			public const int StatItem = 2130903045;
 			
 			static Layout()
 			{
@@ -139,8 +161,8 @@ namespace CookAndroid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f030000
-			public const int app_name = 2130903040;
+			// aapt resource value: 0x7f040000
+			public const int app_name = 2130968576;
 			
 			static String()
 			{

@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Net;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
+[assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 namespace CookAndroid
 {
     [Activity(Label ="Create new menu.", Theme = "@android:style/Theme.NoTitleBar")]
@@ -22,7 +24,7 @@ namespace CookAndroid
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.CreateMenu);
 
-            var buttonSaveMenu = FindViewById<Button>(Resource.Id.ButtonSaveMenu);
+            var buttonSaveMenu = FindViewById<Button>(Resource.Id.CreateMenuSave);
             buttonSaveMenu.Click += ButtonSaveMenu_Click;
 
             this.items = APIClient.GetDishes().Select(a => new DishWrapper
@@ -34,9 +36,8 @@ namespace CookAndroid
                 Name = a.Name
             }).ToList();
 
-            var menuAvailable = FindViewById<ListView>(Resource.Id.MenuAvailable);
+            var menuAvailable = FindViewById<ListView>(Resource.Id.CreateMenuList);
             menuAvailable.Adapter = new CreateMenuAdapter(this, items);
-            menuAvailable.FastScrollEnabled = true;
             menuAvailable.ItemClick += MenuAvailable_ItemClick;
         }
 
@@ -48,28 +49,14 @@ namespace CookAndroid
 
         private void MenuAvailable_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            var t = items[e.Position];
-            t.IsSelected = true;
-            
+            var item = items[e.Position];
+            item.IsSelected = !item.IsSelected;
+            e.View.FindViewById<TextView>(Resource.Id.CreateMenuItemIsSelected).Text = item.IsSelected ? "X" : "-";
         }
 
-        public class DishWrapper : DishItem, INotifyPropertyChanged
+        public class DishWrapper : DishItem
         {
-            private bool isSelected = false;
-            public bool IsSelected
-            {
-                get
-                {
-                    return isSelected;
-                }
-                set
-                {
-                    isSelected = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsSelected"));
-                }
-            }
-
-            public event PropertyChangedEventHandler PropertyChanged;
+            public bool IsSelected { get; set; }
         }
 
         public class CreateMenuAdapter : BaseAdapter<DishWrapper>
@@ -106,9 +93,11 @@ namespace CookAndroid
                     view = context.LayoutInflater.Inflate(Resource.Layout.CreateMenuItem, null);
                 }
 
-                view.FindViewById<TextView>(Resource.Id.NameText).Text = items[position].Name;
-                view.FindViewById<TextView>(Resource.Id.DescriptionText).Text = items[position].IsVegan ? "Vegan" : "All";
-                view.FindViewById<TextView>(Resource.Id.IsSelected).Text = items[position].IsSelected ? "X" : "-";
+
+                view.FindViewById<TextView>(Resource.Id.CreateMenuItemName).Text = items[position].Name;
+                view.FindViewById<TextView>(Resource.Id.CreateMenuItemDescription).Text = items[position].IsVegan ? "Vegan" : "All";
+                view.FindViewById<TextView>(Resource.Id.CreateMenuItemIsSelected).Text = items[position].IsSelected ? "X" : "-";
+                view.FindViewById<ImageView>(Resource.Id.CreateMenuItemImage).SetImageBitmap(ImageDownloader.GetImageBitmapFromUrl(items[position].ImageUrl));
                 return view;
             }
         }

@@ -12,6 +12,6 @@ namespace CookMasterApiModel
     /// </summary>
     public class DishesResponse
     {
-        List<DishItem> Dishes { get; set; }
+        public List<DishItem> Dishes { get; set; }
     }
 }

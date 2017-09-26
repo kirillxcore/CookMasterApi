@@ -18,7 +18,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/LabelError"
+            android:id="@+id/LoginError"
             android:textSize="15dp"
             android:textColor="@android:color/holo_red_light" />
         <TextView
@@ -29,7 +29,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/EditLogin" />
+            android:id="@+id/LoginLogin" />
         <TextView
             android:text="Password"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -38,11 +38,11 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/EditPassword" />
+            android:id="@+id/LoginPassword" />
         <Button
             android:text="Login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ButtonLogin" />
+            android:id="@+id/LoginButton" />
     </LinearLayout>
 </LinearLayout>
