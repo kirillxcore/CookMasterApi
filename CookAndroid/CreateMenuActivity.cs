@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
+[assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 namespace CookAndroid
 {
     [Activity(Label ="Create new menu.", Theme = "@android:style/Theme.NoTitleBar")]
@@ -96,7 +97,7 @@ namespace CookAndroid
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemName).Text = items[position].Name;
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemDescription).Text = items[position].IsVegan ? "Vegan" : "All";
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemIsSelected).Text = items[position].IsSelected ? "X" : "-";
-                //view.FindViewById<ImageView>(Resource.Id.CreateMenuItemImage).SetImageURI(Uri.Parse(items[position].ImageUrl));
+                view.FindViewById<ImageView>(Resource.Id.CreateMenuItemImage).SetImageBitmap(ImageDownloader.GetImageBitmapFromUrl(items[position].ImageUrl));
                 return view;
             }
         }

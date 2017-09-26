@@ -8,6 +8,7 @@ using Android.Views;
 using System.Linq;
 using Android.Net;
 
+[assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 namespace CookAndroid
 {
     [Activity(Label = "Statistic", Theme = "@android:style/Theme.NoTitleBar")]
@@ -83,7 +84,7 @@ namespace CookAndroid
                 view.FindViewById<TextView>(Resource.Id.StatItemName).Text = items[position].Name;
                 view.FindViewById<TextView>(Resource.Id.StatItemDescription).Text = items[position].IsVegan ? "Vegan" : "All";
                 view.FindViewById<TextView>(Resource.Id.StatItemCount).Text = items[position].Count.ToString();
-                //view.FindViewById<ImageView>(Resource.Id.StatItemImage).SetImageURI(Uri.Parse(items[position].ImageUrl));
+                view.FindViewById<ImageView>(Resource.Id.StatItemImage).SetImageBitmap(ImageDownloader.GetImageBitmapFromUrl(items[position].ImageUrl));
                 return view;
             }
         }

@@ -58,6 +58,7 @@
     <Compile Include="LoginActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Repo\APIClient.cs" />
+    <Compile Include="Repo\ImageDownloader.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StatActivity.cs" />
