@@ -22,7 +22,7 @@ namespace CookAndroid
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.CreateMenu);
 
-            var buttonSaveMenu = FindViewById<Button>(Resource.Id.ButtonSaveMenu);
+            var buttonSaveMenu = FindViewById<Button>(Resource.Id.CreateMenuSave);
             buttonSaveMenu.Click += ButtonSaveMenu_Click;
 
             this.items = APIClient.GetDishes().Select(a => new DishWrapper
@@ -34,7 +34,7 @@ namespace CookAndroid
                 Name = a.Name
             }).ToList();
 
-            var menuAvailable = FindViewById<ListView>(Resource.Id.MenuAvailable);
+            var menuAvailable = FindViewById<ListView>(Resource.Id.CreateMenuList);
             menuAvailable.Adapter = new CreateMenuAdapter(this, items);
             menuAvailable.FastScrollEnabled = true;
             menuAvailable.ItemClick += MenuAvailable_ItemClick;
@@ -106,9 +106,9 @@ namespace CookAndroid
                     view = context.LayoutInflater.Inflate(Resource.Layout.CreateMenuItem, null);
                 }
 
-                view.FindViewById<TextView>(Resource.Id.NameText).Text = items[position].Name;
-                view.FindViewById<TextView>(Resource.Id.DescriptionText).Text = items[position].IsVegan ? "Vegan" : "All";
-                view.FindViewById<TextView>(Resource.Id.IsSelected).Text = items[position].IsSelected ? "X" : "-";
+                view.FindViewById<TextView>(Resource.Id.CreateMenuItemName).Text = items[position].Name;
+                view.FindViewById<TextView>(Resource.Id.CreateMenuItemDescription).Text = items[position].IsVegan ? "Vegan" : "All";
+                view.FindViewById<TextView>(Resource.Id.CreateMenuItemIsSelected).Text = items[position].IsSelected ? "X" : "-";
                 return view;
             }
         }

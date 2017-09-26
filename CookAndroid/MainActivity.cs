@@ -16,9 +16,9 @@ namespace CookAndroid
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            Button buttonCreateMenu = FindViewById<Button>(Resource.Id.ButtonCreateMenu);
-            Button buttonViewStatistic = FindViewById<Button>(Resource.Id.ButtonViewStatistic);
-            Button buttonViewWeekStatistic = FindViewById<Button>(Resource.Id.ButtonViewWeekStatistic);
+            Button buttonCreateMenu = FindViewById<Button>(Resource.Id.MainCreateMenu);
+            Button buttonViewStatistic = FindViewById<Button>(Resource.Id.MainViewStatistic);
+            Button buttonViewWeekStatistic = FindViewById<Button>(Resource.Id.MainViewWeekStatistic);
 
             buttonCreateMenu.Click += (object sender, EventArgs e) =>
             {

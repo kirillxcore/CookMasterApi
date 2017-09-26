@@ -13,15 +13,15 @@
         android:text="Create menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ButtonCreateMenu" />
+        android:id="@+id/MainCreateMenu" />
     <Button
         android:text="Live statistic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ButtonViewStatistic" />
+        android:id="@+id/MainViewStatistic" />
     <Button
         android:text="Week statistic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ButtonViewWeekStatistic" />
+        android:id="@+id/MainViewWeekStatistic" />
 </LinearLayout>

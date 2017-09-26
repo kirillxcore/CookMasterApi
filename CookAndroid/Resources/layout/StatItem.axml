@@ -15,12 +15,12 @@
         android:text="Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/NameStatText" />
+        android:id="@+id/StatItemName" />
       <TextView
           android:text="Create menu"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:id="@+id/DescriptionStatText" />
+          android:id="@+id/StatItemDescription" />
       <TextView
           android:text=""
           android:layout_width="match_parent"
@@ -32,6 +32,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:id="@+id/CountStatText" />
+        android:id="@+id/StatItemCount" />
   </LinearLayout>
 </LinearLayout>

@@ -44,56 +44,56 @@ namespace CookAndroid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040009
-			public const int ButtonCreateMenu = 2130968585;
-			
-			// aapt resource value: 0x7f040008
-			public const int ButtonLogin = 2130968584;
-			
-			// aapt resource value: 0x7f040000
-			public const int ButtonSaveMenu = 2130968576;
-			
-			// aapt resource value: 0x7f04000a
-			public const int ButtonViewStatistic = 2130968586;
-			
-			// aapt resource value: 0x7f04000b
-			public const int ButtonViewWeekStatistic = 2130968587;
-			
-			// aapt resource value: 0x7f040010
-			public const int CountStatText = 2130968592;
-			
-			// aapt resource value: 0x7f04000f
-			public const int DescriptionStatText = 2130968591;
-			
 			// aapt resource value: 0x7f040003
-			public const int DescriptionText = 2130968579;
-			
-			// aapt resource value: 0x7f040006
-			public const int EditLogin = 2130968582;
-			
-			// aapt resource value: 0x7f040007
-			public const int EditPassword = 2130968583;
+			public const int CreateMenuItemDescription = 2130968579;
 			
 			// aapt resource value: 0x7f040004
-			public const int IsSelected = 2130968580;
-			
-			// aapt resource value: 0x7f040005
-			public const int LabelError = 2130968581;
-			
-			// aapt resource value: 0x7f04000c
-			public const int LabelStatHeader = 2130968588;
-			
-			// aapt resource value: 0x7f040001
-			public const int MenuAvailable = 2130968577;
-			
-			// aapt resource value: 0x7f04000e
-			public const int NameStatText = 2130968590;
+			public const int CreateMenuItemIsSelected = 2130968580;
 			
 			// aapt resource value: 0x7f040002
-			public const int NameText = 2130968578;
+			public const int CreateMenuItemName = 2130968578;
+			
+			// aapt resource value: 0x7f040001
+			public const int CreateMenuList = 2130968577;
+			
+			// aapt resource value: 0x7f040000
+			public const int CreateMenuSave = 2130968576;
+			
+			// aapt resource value: 0x7f040008
+			public const int LoginButton = 2130968584;
+			
+			// aapt resource value: 0x7f040005
+			public const int LoginError = 2130968581;
+			
+			// aapt resource value: 0x7f040006
+			public const int LoginLogin = 2130968582;
+			
+			// aapt resource value: 0x7f040007
+			public const int LoginPassword = 2130968583;
+			
+			// aapt resource value: 0x7f040009
+			public const int MainCreateMenu = 2130968585;
+			
+			// aapt resource value: 0x7f04000a
+			public const int MainViewStatistic = 2130968586;
+			
+			// aapt resource value: 0x7f04000b
+			public const int MainViewWeekStatistic = 2130968587;
+			
+			// aapt resource value: 0x7f04000c
+			public const int StatHeader = 2130968588;
+			
+			// aapt resource value: 0x7f040010
+			public const int StatItemCount = 2130968592;
+			
+			// aapt resource value: 0x7f04000f
+			public const int StatItemDescription = 2130968591;
+			
+			// aapt resource value: 0x7f04000e
+			public const int StatItemName = 2130968590;
 			
 			// aapt resource value: 0x7f04000d
-			public const int StatAvailable = 2130968589;
+			public const int StatList = 2130968589;
 			
 			static Id()
 			{

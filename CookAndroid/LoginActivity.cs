@@ -18,10 +18,10 @@ namespace CookAndroid
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Login);
 
-            EditText editLogin = FindViewById<EditText>(Resource.Id.EditLogin);
-            EditText editPassword = FindViewById<EditText>(Resource.Id.EditPassword);
-            Button buttonLogin = FindViewById<Button>(Resource.Id.ButtonLogin);
-            TextView labelError = FindViewById<TextView>(Resource.Id.LabelError);
+            EditText editLogin = FindViewById<EditText>(Resource.Id.LoginLogin);
+            EditText editPassword = FindViewById<EditText>(Resource.Id.LoginPassword);
+            Button buttonLogin = FindViewById<Button>(Resource.Id.LoginButton);
+            TextView labelError = FindViewById<TextView>(Resource.Id.LoginError);
 
             editLogin.TextChanged += (object sender, TextChangedEventArgs e) =>
             {
