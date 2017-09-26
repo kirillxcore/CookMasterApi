@@ -2,10 +2,10 @@
 
 namespace CookFormMaster.Models
 {
-	public class FormResponse
+	public class FormAnswer
 	{
 		public string ResponseId { get; set; }
 
-		public List<FormValue> FormValues { get; set; }
+		public List<FormAnswerValue> FormValues { get; set; }
 	}
 }

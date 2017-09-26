@@ -4,7 +4,8 @@ namespace CookFormMaster.Models
 {
 	public class Wishes
 	{
-		public string title { get; set; }
-		public List<string> values { get; set; }
+		public string Title { get; set; }
+
+		public List<string> Values { get; set; }
 	}
 }
