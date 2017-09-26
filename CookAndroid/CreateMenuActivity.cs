@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Net;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -36,7 +37,6 @@ namespace CookAndroid
 
             var menuAvailable = FindViewById<ListView>(Resource.Id.CreateMenuList);
             menuAvailable.Adapter = new CreateMenuAdapter(this, items);
-            menuAvailable.FastScrollEnabled = true;
             menuAvailable.ItemClick += MenuAvailable_ItemClick;
         }
 
@@ -48,28 +48,14 @@ namespace CookAndroid
 
         private void MenuAvailable_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            var t = items[e.Position];
-            t.IsSelected = true;
-            
+            var item = items[e.Position];
+            item.IsSelected = !item.IsSelected;
+            e.View.FindViewById<TextView>(Resource.Id.CreateMenuItemIsSelected).Text = item.IsSelected ? "X" : "-";
         }
 
-        public class DishWrapper : DishItem, INotifyPropertyChanged
+        public class DishWrapper : DishItem
         {
-            private bool isSelected = false;
-            public bool IsSelected
-            {
-                get
-                {
-                    return isSelected;
-                }
-                set
-                {
-                    isSelected = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsSelected"));
-                }
-            }
-
-            public event PropertyChangedEventHandler PropertyChanged;
+            public bool IsSelected { get; set; }
         }
 
         public class CreateMenuAdapter : BaseAdapter<DishWrapper>
@@ -106,9 +92,11 @@ namespace CookAndroid
                     view = context.LayoutInflater.Inflate(Resource.Layout.CreateMenuItem, null);
                 }
 
+
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemName).Text = items[position].Name;
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemDescription).Text = items[position].IsVegan ? "Vegan" : "All";
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemIsSelected).Text = items[position].IsSelected ? "X" : "-";
+                //view.FindViewById<ImageView>(Resource.Id.CreateMenuItemImage).SetImageURI(Uri.Parse(items[position].ImageUrl));
                 return view;
             }
         }

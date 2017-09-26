@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using CookMasterApiModel;
 using Android.Views;
 using System.Linq;
+using Android.Net;
 
 namespace CookAndroid
 {
@@ -38,7 +39,6 @@ namespace CookAndroid
 
             var menuAvailable = FindViewById<ListView>(Resource.Id.StatList);
             menuAvailable.Adapter = new StatAdapter(this, items);
-            menuAvailable.FastScrollEnabled = true;
         }
 
         public class DishWrapper : DishItem
@@ -83,6 +83,7 @@ namespace CookAndroid
                 view.FindViewById<TextView>(Resource.Id.StatItemName).Text = items[position].Name;
                 view.FindViewById<TextView>(Resource.Id.StatItemDescription).Text = items[position].IsVegan ? "Vegan" : "All";
                 view.FindViewById<TextView>(Resource.Id.StatItemCount).Text = items[position].Count.ToString();
+                //view.FindViewById<ImageView>(Resource.Id.StatItemImage).SetImageURI(Uri.Parse(items[position].ImageUrl));
                 return view;
             }
         }
