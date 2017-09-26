@@ -6,5 +6,6 @@
         public string Name { get; set; }
         public bool IsVegan { get; set; }
         public string ImageUrl { get; set; }
+        public int CategoryId { get; set; }
     }
 }

@@ -39,13 +39,14 @@ namespace CookRepository
         {
             using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
             {
-                var cookerQuery = db.Query("SELECT * FROM dishes");
+                var cookerQuery = db.Query("SELECT * FROM Dishes");
                 return cookerQuery.Select(x => new DishItem()
                 {
-                    Id = x.id,
+                    Id = x.id.ToString(),
                     Name = x.title,
-                    ImageUrl = x.image_url,
-                    IsVegan = false
+                    ImageUrl = x.image,
+                    IsVegan = false,
+                    CategoryId = x.category_id
                 }).ToList();
 
             }
