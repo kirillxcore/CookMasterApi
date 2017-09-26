@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookRepository", "CookRepos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookData", "CookData\CookData.csproj", "{E5ECE5B5-534E-465E-9139-C96EA8E2A62E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMF.Android", "CookAndroid\CMF.Android.csproj", "{065DD4D9-043E-4395-A736-4C5D4B627F28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookAndroid", "CookAndroid\CookAndroid.csproj", "{065DD4D9-043E-4395-A736-4C5D4B627F28}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookMasterApiModel", "CookMasterApiModel\CookMasterApiModel.csproj", "{F8E62BA3-F374-4EDF-8C84-1CA8AA1D0CA4}"
 EndProject
