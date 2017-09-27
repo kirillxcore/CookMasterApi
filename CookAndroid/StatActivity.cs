@@ -35,7 +35,9 @@ namespace CookAndroid
                 Count = a.Count,
                 ImageUrl = a.Item.ImageUrl,
                 IsVegan = a.Item.IsVegan,
-                Name = a.Item.Name
+                Name = a.Item.Name,
+                CategoryId = a.Item.CategoryId,
+                Description = a.Item.Description
             }).ToList();
 
             var menuAvailable = FindViewById<ListView>(Resource.Id.StatList);
@@ -82,7 +84,7 @@ namespace CookAndroid
                 }
 
                 view.FindViewById<TextView>(Resource.Id.StatItemName).Text = items[position].Name;
-                view.FindViewById<TextView>(Resource.Id.StatItemDescription).Text = items[position].IsVegan ? "Vegan" : "All";
+                view.FindViewById<TextView>(Resource.Id.StatItemDescription).Text = items[position].Description;
                 view.FindViewById<TextView>(Resource.Id.StatItemCount).Text = items[position].Count.ToString();
                 view.FindViewById<ImageView>(Resource.Id.StatItemImage).SetImageBitmap(ImageDownloader.GetImageBitmapFromUrl(items[position].ImageUrl));
                 return view;
