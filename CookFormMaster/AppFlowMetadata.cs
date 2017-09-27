@@ -10,9 +10,7 @@ namespace CookFormMaster
     public class AppFlowMetadata : FlowMetadata
     {
 
-        static string[] Scopes = { "https://www.googleapis.com/auth/forms", "https://www.googleapis.com/auth/script.external_request", "https://www.googleapis.com/auth/script.send_mail" };
-        static string ApplicationName = "Google Apps Script Execution API";
-
+        static readonly string[] Scopes = { "https://www.googleapis.com/auth/forms", "https://www.googleapis.com/auth/script.external_request", "https://www.googleapis.com/auth/script.send_mail" };
 
         private static readonly IAuthorizationCodeFlow flow =
             new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer

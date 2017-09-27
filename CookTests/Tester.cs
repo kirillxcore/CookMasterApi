@@ -14,8 +14,6 @@ namespace CookTests
         [Test]
         public void Test()
         {
-            CookFormManager cookFormManager = new CookFormManager();
-            cookFormManager.Test();
         }
 
         [Test]

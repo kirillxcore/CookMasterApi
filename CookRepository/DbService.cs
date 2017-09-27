@@ -47,7 +47,8 @@ namespace CookRepository
                     Name = x.title,
                     ImageUrl = x.image,
                     IsVegan = false,
-                    CategoryId = x.category_id
+                    CategoryId = x.category_id,
+                    Description = x.description
                 }).ToList();
 
             }
@@ -57,7 +58,7 @@ namespace CookRepository
         {
             using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
             {
-                var cookerQuery = db.Query($"SELECT * FROM Cooker WHERE login={login} AND password={password}");
+                var cookerQuery = db.Query($"SELECT * FROM Cooks WHERE login={login} AND password={password}");
                 return cookerQuery.Select(x => new Cooker
                 {
                     Id = x.id,
@@ -74,7 +75,7 @@ namespace CookRepository
         {
             using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
             {
-                var cookerQuery = db.Query($"SELECT * FROM Cooker WHERE id={id}");
+                var cookerQuery = db.Query($"SELECT * FROM Cooks WHERE id={id}");
                 return cookerQuery.Select(x => new Cooker
                 {
                     Id = x.id,
@@ -84,6 +85,37 @@ namespace CookRepository
                     Token = x.token
                 }).FirstOrDefault();
 
+            }
+        }
+
+        public List<DishCategory> GetCategories()
+        {
+            using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
+            {
+                var cookerQuery = db.Query("SELECT * FROM Categories");
+                return cookerQuery.Select(x => new DishCategory
+                {
+                    Id = x.id,
+                    Title = x.title
+                }).ToList();
+            }
+        }
+
+        public void CreateMenu(string formUrl, string formId, List<Tuple<int,int>> relationsBetweenIds, int cookerId, DateTime date)
+        {
+            using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
+            {
+                string sql = $@"
+INSERT INTO [Menus] (form_url,form_response_id,cook_id, date) VALUES ('{formUrl}','{formId}',{cookerId}, DATEFROMPARTS({date.Year},{date.Month},{date.Day}));
+SELECT CAST(SCOPE_IDENTITY() as int)";
+
+                var id = db.Query<int>(sql).Single();
+
+                foreach (var rel in relationsBetweenIds)
+                {
+                    string sql2 = $@"INSERT INTO [DishForm] (menu_id,dish_id,form_id) VALUES ({id},{rel.Item1},{rel.Item2})";
+                    db.Execute(sql2);
+                }
             }
         }
     }

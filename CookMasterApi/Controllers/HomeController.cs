@@ -15,11 +15,7 @@ namespace CookMasterApi.Controllers
 
 			if (result.Credential != null)
             {
-                CookFormManager cookFormManager = new CookFormManager();
-                cookFormManager.SetScriptService(result.Credential);
-
-
-				ViewBag.Message =  cookFormManager.Test();
+                CookFormManager.Instance.SetScriptService(result.Credential);
 
 	            return View("Index");
 			}
@@ -28,5 +24,7 @@ namespace CookMasterApi.Controllers
                 return new RedirectResult(result.RedirectUri);
             }
         }
+
+
     }
 }

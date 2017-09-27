@@ -14,7 +14,7 @@ namespace CookMasterApi.Controllers
     public class CookController : ApiController
     {
         readonly DbService _dbService = new DbService();
-        private readonly CookFormManager _cookFormManager = new CookFormManager();
+        private const int DefaultCookerId = 2;
 
         [HttpPost]
         [ActionName("Login")]
@@ -32,34 +32,63 @@ namespace CookMasterApi.Controllers
         [ActionName("Publish")]
         public HttpResponseMessage Publish([FromBody] PublishRequest request)
         {
-            var dishes = _dbService.GetDishes();
-            Menu menu = new Menu
+            try
             {
-                Days = new List<MenuDay> { new MenuDay
+                var dishes = _dbService.GetDishes();
+
+                Menu menu = new Menu
                 {
-                    Title = DateTime.Now.Date.AddDays(1).DayOfWeek+' '+DateTime.Now.Date.AddDays(1).ToShortDateString(),
-                    Categories = new List<Category>()
-                }},
-                Title = "Меню на выбор",
-                Description = _dbService.GetCookerbyId(2).Name,
-                Wishes = new Wishes
-                {
-                    Title = "Пожелания",
-                    Values = new List<string>
+                    Days = new List<MenuDay>
                     {
-                        "Больше мяса",
-                        "Больше сладкого"
+                        new MenuDay
+                        {
+                            Title = DateTime.Now.Date.AddDays(1).DayOfWeek.ToString() + ' ' + DateTime.Now.Date.AddDays(1).ToShortDateString(),
+                            Categories = new List<Category>()
+                        }
+                    },
+                    Title = "Меню на выбор",
+                    Description = _dbService.GetCookerbyId(DefaultCookerId).Name,
+                    Wishes = new Wishes
+                    {
+                        Title = "Пожелания",
+                        Values = new List<string>
+                        {
+                            "Больше мяса",
+                            "Больше сладкого"
+                        }
+                    }
+                };
+
+                dishes = dishes.Where(d => request.Ids.Contains(d.Id)).ToList();
+
+                foreach (var category in _dbService.GetCategories())
+                {
+                    var catDishes = dishes.Where(d => d.CategoryId == category.Id);
+                    if (catDishes.Any())
+                    {
+                        menu.Days[0].Categories.Add(new Category
+                        {
+                            Dishes = catDishes.Select(d => new Dish
+                            {
+                                Id = int.Parse(d.Id),
+                                Title = d.Name,
+                                Description = d.Description,
+                                Image = d.ImageUrl
+                            }).ToList(),
+                            Title = category.Title
+                        });
                     }
                 }
-            };
 
-            foreach (var id in request.Ids)
-            {
-                var dishItem = dishes.Single(x => x.Id == id);
+                var formResponse = CookFormManager.Instance.CreateForm(menu, "cookmaster2018@gmail.com");
+
+                _dbService.CreateMenu(formResponse.PublishUrl, formResponse.FormId,
+                    formResponse.RelationsBetweenIds.Select(x => new Tuple<int, int>(x.Id, x.FormId)).ToList(), DefaultCookerId, DateTime.Now.Date.AddDays(1));
             }
-
-          // _cookFormManager.CreateForm(menu)
-
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
@@ -82,34 +111,6 @@ namespace CookMasterApi.Controllers
             };
 
             return Request.CreateResponse(HttpStatusCode.OK, response);
-        }
-
-        // GET: api/Cook
-        public string Get()
-        {
-            CookFormManager cookFormManager = new CookFormManager();
-            return cookFormManager.Test();
-        }
-
-        // GET: api/Cook/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Cook
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Cook/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Cook/5
-        public void Delete(int id)
-        {
         }
     }
 }
