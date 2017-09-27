@@ -11,7 +11,7 @@ namespace CookRepository
     public class DbService
     {
         private const string DatabaseConnectionString =
-                "Server=192.168.50.39;Database=CookMaster;User ID=sa;Password=qwe123;";
+                "Server=.;Database=CookMaster;User ID=sa;Password=qwe123;";
 
 /*        public Cooker GetCooker(int id)
         {
