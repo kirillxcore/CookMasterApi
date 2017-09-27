@@ -12,7 +12,6 @@ namespace CookMasterApiModel
     /// </summary>
     public class StatResponse
     {
-        List<DishItemStat> Stat { get; set; }
-
+       public List<DishItemStat> Stat { get; set; }
     }
 }

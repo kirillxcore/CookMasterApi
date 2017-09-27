@@ -98,6 +98,53 @@ namespace CookMasterApi.Controllers
         {
             StatResponse response = new StatResponse();
 
+            var dishItems = _dbService.GetDishes();
+            Dictionary<int,int> counts = new Dictionary<int, int>();
+            foreach (var dish in dishItems)
+            {
+                counts.Add(int.Parse(dish.Id), 0);
+            }
+
+            response.Stat = new List<DishItemStat>();
+
+            for (int i = days; i > 0 ; i--)
+            {
+                foreach (var menu in _dbService.GetMenus(DefaultCookerId, DateTime.Now.Date.AddDays(2 - i)))
+                {
+                    var formAnswers = CookFormManager.Instance.GetFormResult(menu.FormId);
+                    var dishesRelationsByMenu = _dbService.GetDishesRelationsByMenu(menu.Id);
+                    foreach (var formAnswer in formAnswers)
+                    {
+                        foreach (var value in formAnswer.FormValues)
+                        {
+                            if (dishesRelationsByMenu.ContainsKey(value.FormId))
+                            {
+                                counts[dishesRelationsByMenu[value.FormId]]++;
+                            }
+                        }
+                    }
+
+                    foreach (var dishCount in counts)
+                    {
+                        if (dishCount.Value > 0)
+                        {
+                            response.Stat.Add(new DishItemStat
+                            {
+                                Date = DateTime.Now.Date.AddDays(2 - i),
+                                Count = dishCount.Value,
+                                Item = dishItems.Single(d => d.Id == dishCount.Key.ToString())
+                            });
+                        }
+                    }
+
+                    counts = new Dictionary<int, int>();
+                    foreach (var dish in dishItems)
+                    {
+                        counts.Add(int.Parse(dish.Id), 0);
+                    }
+                }
+            }
+
             return Request.CreateResponse(HttpStatusCode.OK, response);
         }
 

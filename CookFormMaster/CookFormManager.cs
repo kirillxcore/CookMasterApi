@@ -51,15 +51,32 @@ namespace CookFormMaster
 
 	        var request = new ExecutionRequest();
 	        request.Function = "createForm";
-	        request.Parameters = new List<object> { emails, menuJson };
+	        request.Parameters = new List<object> {emails, menuJson};
 	        request.DevMode = false;
 	        var scriptId = "1s65xtr2aqSWhWRWU4xUT3CPX2S5jqvYhoiO5olF2st-9FuhZO8a9rhi6";
 
 	        var runReq = ScriptService.Scripts.Run(request, scriptId);
 
+	        return JsonConvert.DeserializeObject<FormCreationResponse>(ProcessResult(runReq));
+	    }
 
+	    public IList<FormAnswer> GetFormResult(string menuFormId)
+	    {
+	        var request = new ExecutionRequest();
+	        request.Function = "responseForm";
+	        request.Parameters = new List<object> {menuFormId};
+	        var scriptId = "1s65xtr2aqSWhWRWU4xUT3CPX2S5jqvYhoiO5olF2st-9FuhZO8a9rhi6";
+
+	        var runReq = ScriptService.Scripts.Run(request, scriptId);
+
+	        return JsonConvert.DeserializeObject<IList<FormAnswer>>(ProcessResult(runReq));
+
+	    }
+
+	    private string ProcessResult(ScriptsResource.RunRequest runReq)
+	    {
 	        var errorMessages = new StringBuilder("");
-            try
+	        try
 	        {
 	            var op = runReq.Execute();
 
@@ -82,10 +99,7 @@ namespace CookFormMaster
 	            }
 	            else
 	            {
-	                var resultJson = op.Response["result"].ToString();
-
-	                return JsonConvert.DeserializeObject<FormCreationResponse>(resultJson);
-	                //					var formAnswers = JsonConvert.DeserializeObject<IList<FormAnswer>>(resultJson);
+	               return op.Response["result"].ToString();
 	            }
 	        }
 	        catch (Google.GoogleApiException e)
@@ -93,10 +107,10 @@ namespace CookFormMaster
 	            errorMessages.AppendLine($"Error calling API:\n{e}");
 	        }
 
-            throw new Exception(errorMessages.ToString());
+	        throw new Exception(errorMessages.ToString());
         }
 
-		public static string Test()
+	    public static string Test()
 		{
 			var result = new StringBuilder("");
 
