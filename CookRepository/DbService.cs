@@ -13,29 +13,6 @@ namespace CookRepository
         private const string DatabaseConnectionString =
                 "Server=192.168.50.39;Database=CookMaster;User ID=sa;Password=qwe123;";
 
-/*        public Cooker GetCooker(int id)
-        {
-            using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
-            {
-                var cookerQuery = db.Query($"SELECT * FROM Cookers WHERE id={id}");
-                var cooker = cookerQuery.Select(x => new Cooker
-                {
-                    Id = x.id,
-                    Name = x.name
-                }).First();
-
-                var dishesQuery = db.Query($"SELECT * FROM Dishes WHERE cooker_id={id}");
-
-                cooker.Dishes = dishesQuery.Select(x => new Dish
-                {
-                    Id = x.id,
-                    Name = x.name
-                }).ToList();
-
-                return cooker;
-            }
-        }*/
-
         public List<DishItem> GetDishes()
         {
             using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
@@ -117,6 +94,11 @@ SELECT CAST(SCOPE_IDENTITY() as int)";
                     db.Execute(sql2);
                 }
             }
+        }
+
+        public List<DishItemStat> GetStatsByDateRange(int cookerId, int days)
+        {
+            return null;
         }
     }
 }

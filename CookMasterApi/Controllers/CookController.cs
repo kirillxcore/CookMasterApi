@@ -97,6 +97,51 @@ namespace CookMasterApi.Controllers
         public HttpResponseMessage Stat(int days)
         {
             StatResponse response = new StatResponse();
+            response.Stat = new List<DishItemStat>
+            {
+                new DishItemStat
+                {
+                    Date = DateTime.Now.Date.AddDays(1),
+                    Count = 20,
+                    Item = new DishItem()
+                    {
+                        Id = "1",
+                        Description = "sdfsadfsdfsadfsadfsadf sadf asdf sadf asd f",
+                        Name = "Soap 222!",
+                        ImageUrl = "https://static.gamespot.com/uploads/original/554/5540228/2735230-8418504311-I-Had-.jpeg",
+                        CategoryId = 1,
+                        IsVegan = false
+                    }
+                },
+                new DishItemStat
+                {
+                    Date = DateTime.Now.Date.AddDays(1),
+                    Count = 10,
+                    Item = new DishItem()
+                    {
+                        Id = "1",
+                        Description = "sdfsadfasdfasdfasdf sadf asdf sadf asd f",
+                        Name = "Soap!",
+                        ImageUrl = "https://static.gamespot.com/uploads/original/554/5540228/2735230-8418504311-I-Had-.jpeg",
+                        CategoryId = 1,
+                        IsVegan = false
+                    }
+                },
+                new DishItemStat
+                {
+                    Date = DateTime.Now.Date.AddDays(1),
+                    Count = 2,
+                    Item = new DishItem()
+                    {
+                        Id = "1",
+                        Description = "sdfsafsadfsadfsdfsadf asd f",
+                        Name = "Soap 333!",
+                        ImageUrl = "https://static.gamespot.com/uploads/original/554/5540228/2735230-8418504311-I-Had-.jpeg",
+                        CategoryId = 1,
+                        IsVegan = false
+                    }
+                }
+            };
 
             return Request.CreateResponse(HttpStatusCode.OK, response);
         }
