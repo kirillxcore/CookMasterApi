@@ -36,7 +36,7 @@ namespace CookRepository
         {
             using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
             {
-                var query = db.Query($"SELECT * FROM Cooks WHERE login={login} AND password={password}");
+                var query = db.Query($"SELECT * FROM Cooks WHERE login='{login}' AND password='{password}'");
                 return query.Select(x => new Cooker
                 {
                     Id = x.id,
