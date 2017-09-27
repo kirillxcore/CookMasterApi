@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using CookMasterApiModel;
+using CookRepository.Models;
 using Dapper;
 
 namespace CookRepository
@@ -11,14 +12,14 @@ namespace CookRepository
     public class DbService
     {
         private const string DatabaseConnectionString =
-                "Server=192.168.50.39;Database=CookMaster;User ID=sa;Password=qwe123;";
+            "Server=10.195.0.121;Database=CookMaster;User ID=sa;Password=qwe123;";
 
         public List<DishItem> GetDishes()
         {
             using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
             {
-                var cookerQuery = db.Query("SELECT * FROM Dishes");
-                return cookerQuery.Select(x => new DishItem()
+                var query = db.Query("SELECT * FROM Dishes");
+                return query.Select(x => new DishItem()
                 {
                     Id = x.id.ToString(),
                     Name = x.title,
@@ -35,8 +36,8 @@ namespace CookRepository
         {
             using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
             {
-                var cookerQuery = db.Query($"SELECT * FROM Cooks WHERE login={login} AND password={password}");
-                return cookerQuery.Select(x => new Cooker
+                var query = db.Query($"SELECT * FROM Cooks WHERE login={login} AND password={password}");
+                return query.Select(x => new Cooker
                 {
                     Id = x.id,
                     Name = x.name,
@@ -52,8 +53,8 @@ namespace CookRepository
         {
             using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
             {
-                var cookerQuery = db.Query($"SELECT * FROM Cooks WHERE id={id}");
-                return cookerQuery.Select(x => new Cooker
+                var query = db.Query($"SELECT * FROM Cooks WHERE id={id}");
+                return query.Select(x => new Cooker
                 {
                     Id = x.id,
                     Name = x.name,
@@ -69,8 +70,8 @@ namespace CookRepository
         {
             using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
             {
-                var cookerQuery = db.Query("SELECT * FROM Categories");
-                return cookerQuery.Select(x => new DishCategory
+                var query = db.Query("SELECT * FROM Categories");
+                return query.Select(x => new DishCategory
                 {
                     Id = x.id,
                     Title = x.title
@@ -78,7 +79,7 @@ namespace CookRepository
             }
         }
 
-        public void CreateMenu(string formUrl, string formId, List<Tuple<int,int>> relationsBetweenIds, int cookerId, DateTime date)
+        public void CreateMenu(string formUrl, string formId, List<Tuple<int, int>> relationsBetweenIds, int cookerId, DateTime date)
         {
             using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
             {
@@ -96,9 +97,26 @@ SELECT CAST(SCOPE_IDENTITY() as int)";
             }
         }
 
-        public List<DishItemStat> GetStatsByDateRange(int cookerId, int days)
+        public List<Menu> GetMenus(int cookerId, DateTime day)
         {
-            return null;
+            using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
+            {
+                var query = db.Query($"SELECT * FROM Menus m where m.date = DATEFROMPARTS({day.Year},{day.Month},{day.Day}) and m.cook_id = {cookerId}");
+                return query.Select(x => new Menu
+                {
+                    Id = (int) x.id,
+                    FormId = x.form_response_id
+                }).ToList();
+            }
+        }
+
+        public Dictionary<int, int> GetDishesRelationsByMenu(int menuId)
+        {
+            using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
+            {
+                var query = db.Query($"SELECT * FROM DishForm where menu_id = {menuId}");
+                return query.ToDictionary(x => (int) x.form_id, x => (int) x.dish_id);
+            }
         }
     }
 }
