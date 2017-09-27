@@ -107,7 +107,7 @@ namespace CookMasterApi.Controllers
 
             response.Stat = new List<DishItemStat>();
 
-            for (int i = days; i > 0 ; i--)
+            for (int i = days; i > 0; i--)
             {
                 foreach (var menu in _dbService.GetMenus(DefaultCookerId, DateTime.Now.Date.AddDays(2 - i)))
                 {
@@ -124,25 +124,27 @@ namespace CookMasterApi.Controllers
                         }
                     }
 
-                    foreach (var dishCount in counts)
-                    {
-                        if (dishCount.Value > 0)
-                        {
-                            response.Stat.Add(new DishItemStat
-                            {
-                                Date = DateTime.Now.Date.AddDays(2 - i),
-                                Count = dishCount.Value,
-                                Item = dishItems.Single(d => d.Id == dishCount.Key.ToString())
-                            });
-                        }
-                    }
+                }
 
-                    counts = new Dictionary<int, int>();
-                    foreach (var dish in dishItems)
+                foreach (var dishCount in counts)
+                {
+                    if (dishCount.Value > 0)
                     {
-                        counts.Add(int.Parse(dish.Id), 0);
+                        response.Stat.Add(new DishItemStat
+                        {
+                            Date = DateTime.Now.Date.AddDays(2 - i),
+                            Count = dishCount.Value,
+                            Item = dishItems.Single(d => d.Id == dishCount.Key.ToString())
+                        });
                     }
                 }
+
+                counts = new Dictionary<int, int>();
+                foreach (var dish in dishItems)
+                {
+                    counts.Add(int.Parse(dish.Id), 0);
+                }
+
             }
 
             return Request.CreateResponse(HttpStatusCode.OK, response);
