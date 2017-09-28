@@ -8,6 +8,7 @@
       android:textAppearance="?android:attr/textAppearanceLarge"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:id="@+id/CreateMenuHeader"
       android:gravity="center_horizontal" />
   <Button
       android:text="Save"

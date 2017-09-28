@@ -24,9 +24,10 @@ namespace CookAndroid
             var days = Intent.GetIntExtra("days", 0);
             
             var labelHeader = FindViewById<TextView>(Resource.Id.StatHeader);
-            var menuAvailable = FindViewById<ListView>(Resource.Id.StatList);
+            labelHeader.Text = "Loading statistic...";
 
-            labelHeader.Text = "Loading Statistic for " + days + " days.";
+            var menuAvailable = FindViewById<ListView>(Resource.Id.StatList);
+            menuAvailable.Clickable = false;
 
             APIClient.Stat(days).ContinueWith(task =>
             {

@@ -26,22 +26,35 @@ namespace CookAndroid
 
             var buttonSaveMenu = FindViewById<Button>(Resource.Id.CreateMenuSave);
             buttonSaveMenu.Click += ButtonSaveMenu_Click;
-
-            this.items = APIClient.GetDishes().Select(a => new DishWrapper
-            {
-                Id = a.Id,
-                IsSelected = false,
-                ImageUrl = a.ImageUrl,
-                ImageUrlAlt = a.ImageUrlAlt,
-                IsVegan = a.IsVegan,
-                Name = a.Name,
-                CategoryId = a.CategoryId,
-                Description = a.Description
-            }).ToList();
+            buttonSaveMenu.Visibility = ViewStates.Invisible;
 
             var menuAvailable = FindViewById<ListView>(Resource.Id.CreateMenuList);
-            menuAvailable.Adapter = new CreateMenuAdapter(this, items);
             menuAvailable.ItemClick += MenuAvailable_ItemClick;
+
+            var labelHeader = FindViewById<TextView>(Resource.Id.CreateMenuHeader);
+            labelHeader.Text = "Loading dishes...";
+
+            APIClient.GetDishes().ContinueWith(task =>
+            {
+                this.RunOnUiThread(() =>
+                {
+                    this.items = task.Result.Select(a => new DishWrapper
+                    {
+                        Id = a.Id,
+                        IsSelected = false,
+                        ImageUrl = a.ImageUrl,
+                        ImageUrlAlt = a.ImageUrlAlt,
+                        IsVegan = a.IsVegan,
+                        Name = a.Name,
+                        CategoryId = a.CategoryId,
+                        Description = a.Description
+                    }).ToList();
+
+                    menuAvailable.Adapter = new CreateMenuAdapter(this, items);
+                    buttonSaveMenu.Visibility = ViewStates.Visible;
+                    labelHeader.Text = "Create menu";
+                });
+            });
         }
 
         private void ButtonSaveMenu_Click(object sender, System.EventArgs e)

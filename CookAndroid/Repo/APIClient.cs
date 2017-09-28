@@ -28,13 +28,14 @@ namespace CookAndroid.Repo
             }
        }
 
-        public static List<DishItem> GetDishes()
+        public static async Task<List<DishItem>> GetDishes()
         {
             using (var webClient = new HttpClient())
             {
-                var response = webClient.PostAsync("http://10.195.0.121:61698/cook/dishes",
-                    new StringContent("", Encoding.UTF8, "application/json")).Result;
-                return Deserialize<DishesResponse>(response.Content.ReadAsStringAsync().Result).Dishes;
+                var response = await webClient.PostAsync("http://10.195.0.121:61698/cook/dishes",
+                    new StringContent("", Encoding.UTF8, "application/json"));
+                var text = await response.Content.ReadAsStringAsync();
+                return Deserialize<DishesResponse>(text).Dishes;
             }
         }
 
