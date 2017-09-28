@@ -22,6 +22,13 @@ namespace CookAndroid
             EditText editPassword = FindViewById<EditText>(Resource.Id.LoginPassword);
             Button buttonLogin = FindViewById<Button>(Resource.Id.LoginButton);
             TextView labelError = FindViewById<TextView>(Resource.Id.LoginError);
+            Button buttonSettings = FindViewById<Button>(Resource.Id.MainViewSettings);
+
+            buttonSettings.Click += (object sender, EventArgs e) =>
+            {
+                var intent = new Intent(this, typeof(SettingsActivity));
+                StartActivity(intent);
+            };
 
             editLogin.TextChanged += (object sender, TextChangedEventArgs e) =>
             {

@@ -96,32 +96,41 @@ namespace CookAndroid
 			// aapt resource value: 0x7f05000a
 			public const int LoginPassword = 2131034122;
 			
-			// aapt resource value: 0x7f05000d
-			public const int MainCreateMenu = 2131034125;
-			
 			// aapt resource value: 0x7f05000e
-			public const int MainViewStatistic = 2131034126;
+			public const int MainCreateMenu = 2131034126;
+			
+			// aapt resource value: 0x7f05000d
+			public const int MainViewSettings = 2131034125;
 			
 			// aapt resource value: 0x7f05000f
-			public const int MainViewWeekStatistic = 2131034127;
+			public const int MainViewStatistic = 2131034127;
 			
 			// aapt resource value: 0x7f050010
-			public const int StatHeader = 2131034128;
-			
-			// aapt resource value: 0x7f050015
-			public const int StatItemCount = 2131034133;
-			
-			// aapt resource value: 0x7f050014
-			public const int StatItemDescription = 2131034132;
+			public const int MainViewWeekStatistic = 2131034128;
 			
 			// aapt resource value: 0x7f050012
-			public const int StatItemImage = 2131034130;
-			
-			// aapt resource value: 0x7f050013
-			public const int StatItemName = 2131034131;
+			public const int SettingsApply = 2131034130;
 			
 			// aapt resource value: 0x7f050011
-			public const int StatList = 2131034129;
+			public const int SettngsHostAddress = 2131034129;
+			
+			// aapt resource value: 0x7f050013
+			public const int StatHeader = 2131034131;
+			
+			// aapt resource value: 0x7f050018
+			public const int StatItemCount = 2131034136;
+			
+			// aapt resource value: 0x7f050017
+			public const int StatItemDescription = 2131034135;
+			
+			// aapt resource value: 0x7f050015
+			public const int StatItemImage = 2131034133;
+			
+			// aapt resource value: 0x7f050016
+			public const int StatItemName = 2131034134;
+			
+			// aapt resource value: 0x7f050014
+			public const int StatList = 2131034132;
 			
 			// aapt resource value: 0x7f050007
 			public const int space1 = 2131034119;
@@ -155,10 +164,13 @@ namespace CookAndroid
 			public const int Main = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int Stat = 2130903044;
+			public const int Settings = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int StatItem = 2130903045;
+			public const int Stat = 2130903045;
+			
+			// aapt resource value: 0x7f030006
+			public const int StatItem = 2130903046;
 			
 			static Layout()
 			{
