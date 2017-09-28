@@ -1,4 +1,5 @@
-﻿using CookMasterApiModel;
+﻿using System;
+using CookMasterApiModel;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -32,14 +33,21 @@ namespace CookAndroid.Repo
         {
             using (var webClient = new HttpClient())
             {
-                var response = await webClient.PostAsync("http://10.195.0.121:61698/cook/dishes",
-                    new StringContent("", Encoding.UTF8, "application/json"));
-                var text = await response.Content.ReadAsStringAsync();
-                return Deserialize<DishesResponse>(text).Dishes;
+                try
+                {
+                    var response = await webClient.PostAsync("http://10.195.0.121:61698/cook/dishes",
+                        new StringContent("", Encoding.UTF8, "application/json"));
+                    var text = await response.Content.ReadAsStringAsync();
+                    return Deserialize<DishesResponse>(text).Dishes;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
             }
         }
 
-        public static void Publish(List<string> ids)
+        public static async Task<bool> Publish(List<string> ids)
         {
             var request = new PublishRequest
             {
@@ -50,25 +58,28 @@ namespace CookAndroid.Repo
 
             using (var webClient = new HttpClient())
             {
-                webClient.PostAsync("http://10.195.0.121:61698/cook/publish",
-                    new StringContent(data, Encoding.UTF8, "application/json")).ContinueWith(
-                    a =>
-                    {
-                        // ToDo: Toast
-                    });
+                var response = await webClient.PostAsync("http://10.195.0.121:61698/cook/publish",
+                    new StringContent(data, Encoding.UTF8, "application/json"));
+                return response.IsSuccessStatusCode;
             }
         }
 
         public static async Task<List<DishItemStat>> Stat(int date)
         {
             var request = date;
-
             using (var webClient = new HttpClient())
             {
-                var response = await webClient.PostAsync("http://10.195.0.121:61698/cook/stat/" + request,
-                    new StringContent("", Encoding.UTF8, "application/json"));
-                var text = await response.Content.ReadAsStringAsync();
-                return Deserialize<StatResponse>(text).Stat;
+                try
+                {
+                    var response = await webClient.PostAsync("http://10.195.0.121:61698/cook/stat/" + request,
+                        new StringContent("", Encoding.UTF8, "application/json"));
+                    var text = await response.Content.ReadAsStringAsync();
+                    return Deserialize<StatResponse>(text).Stat;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
             }
         }
 
