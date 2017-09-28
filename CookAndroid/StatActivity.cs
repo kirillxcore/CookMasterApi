@@ -14,8 +14,6 @@ namespace CookAndroid
     [Activity(Label = "Statistic", Theme = "@android:style/Theme.NoTitleBar")]
     public class StatActivity : Activity
     {
-        List<DishWrapper> items;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -25,24 +23,32 @@ namespace CookAndroid
 
             var days = Intent.GetIntExtra("days", 0);
             
-            TextView labelHeader = FindViewById<TextView>(Resource.Id.StatHeader);
-            labelHeader.Text = "Statistic for " + days + " days.";
-
-
-            this.items = APIClient.Stat(days).Select(a => new DishWrapper
-            {
-                Id = a.Item.Id,
-                Count = a.Count,
-                ImageUrl = a.Item.ImageUrl,
-                ImageUrlAlt = a.Item.ImageUrlAlt,
-                IsVegan = a.Item.IsVegan,
-                Name = a.Item.Name,
-                CategoryId = a.Item.CategoryId,
-                Description = a.Item.Description
-            }).ToList();
+            var labelHeader = FindViewById<TextView>(Resource.Id.StatHeader);
+            labelHeader.Text = "Loading statistic...";
 
             var menuAvailable = FindViewById<ListView>(Resource.Id.StatList);
-            menuAvailable.Adapter = new StatAdapter(this, items);
+            menuAvailable.Clickable = false;
+
+            APIClient.Stat(days).ContinueWith(task =>
+            {
+                this.RunOnUiThread(() =>
+                {
+                    var items = task.Result.Select(a => new DishWrapper
+                    {
+                        Id = a.Item.Id,
+                        Count = a.Count,
+                        ImageUrl = a.Item.ImageUrl,
+                        ImageUrlAlt = a.Item.ImageUrlAlt,
+                        IsVegan = a.Item.IsVegan,
+                        Name = a.Item.Name,
+                        CategoryId = a.Item.CategoryId,
+                        Description = a.Item.Description
+                    }).ToList();
+
+                    labelHeader.Text = "Statistic for " + days + " days.";
+                    menuAvailable.Adapter = new StatAdapter(this, items);
+                });
+            });
         }
 
         public class DishWrapper : DishItem

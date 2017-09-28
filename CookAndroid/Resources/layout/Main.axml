@@ -8,7 +8,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:textSize="40dip"
+        android:layout_marginBottom="20dip" />
     <Button
         android:text="Create menu"
         android:layout_width="match_parent"
