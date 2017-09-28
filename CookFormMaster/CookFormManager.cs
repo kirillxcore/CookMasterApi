@@ -34,7 +34,9 @@ namespace CookFormMaster
 	        }
 	    }
 
-		public static ScriptService ScriptService = null;
+	    public bool IsAuthorized => ScriptService != null;
+
+	    public ScriptService ScriptService;
 
 		public void SetScriptService(UserCredential credential)
 		{
