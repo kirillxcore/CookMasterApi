@@ -37,7 +37,7 @@ namespace CookAndroid.Repo
             }
         }
 
-        public static bool Publish(List<string> ids)
+        public static void Publish(List<string> ids)
         {
             var request = new PublishRequest
             {
@@ -48,8 +48,12 @@ namespace CookAndroid.Repo
 
             using (var webClient = new HttpClient())
             {
-                var response = webClient.PostAsync("http://10.195.0.121:61698/cook/publish", new StringContent(data, Encoding.UTF8, "application/json")).Result;
-                return response.StatusCode == HttpStatusCode.OK;
+                webClient.PostAsync("http://10.195.0.121:61698/cook/publish",
+                    new StringContent(data, Encoding.UTF8, "application/json")).ContinueWith(
+                    a =>
+                    {
+                        // ToDo: Toast
+                    });
             }
         }
 
