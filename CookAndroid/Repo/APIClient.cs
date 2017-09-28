@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace CookAndroid.Repo
@@ -57,15 +58,16 @@ namespace CookAndroid.Repo
             }
         }
 
-        public static List<DishItemStat> Stat(int date)
+        public static async Task<List<DishItemStat>> Stat(int date)
         {
             var request = date;
 
             using (var webClient = new HttpClient())
             {
-                var response = webClient.PostAsync("http://10.195.0.121:61698/cook/stat/" + request,
-                    new StringContent("", Encoding.UTF8, "application/json")).Result;
-                return Deserialize<StatResponse>(response.Content.ReadAsStringAsync().Result).Stat;
+                var response = await webClient.PostAsync("http://10.195.0.121:61698/cook/stat/" + request,
+                    new StringContent("", Encoding.UTF8, "application/json"));
+                var text = await response.Content.ReadAsStringAsync();
+                return Deserialize<StatResponse>(text).Stat;
             }
         }
 
