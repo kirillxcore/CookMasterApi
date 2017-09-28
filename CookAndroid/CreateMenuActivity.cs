@@ -33,7 +33,9 @@ namespace CookAndroid
                 IsSelected = false,
                 ImageUrl = a.ImageUrl,
                 IsVegan = a.IsVegan,
-                Name = a.Name
+                Name = a.Name,
+                CategoryId = a.CategoryId,
+                Description = a.Description
             }).ToList();
 
             var menuAvailable = FindViewById<ListView>(Resource.Id.CreateMenuList);
@@ -95,7 +97,7 @@ namespace CookAndroid
 
 
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemName).Text = items[position].Name;
-                view.FindViewById<TextView>(Resource.Id.CreateMenuItemDescription).Text = items[position].IsVegan ? "Vegan" : "All";
+                view.FindViewById<TextView>(Resource.Id.CreateMenuItemDescription).Text = items[position].Description;
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemIsSelected).Text = items[position].IsSelected ? "X" : "-";
                 view.FindViewById<ImageView>(Resource.Id.CreateMenuItemImage).SetImageBitmap(ImageDownloader.GetImageBitmapFromUrl(items[position].ImageUrl));
                 return view;

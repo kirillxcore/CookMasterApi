@@ -32,6 +32,11 @@ namespace CookMasterApi.Controllers
         [ActionName("Publish")]
         public HttpResponseMessage Publish([FromBody] PublishRequest request)
         {
+            if (!CookFormManager.Instance.IsAuthorized)
+            {
+                return Request.CreateResponse(HttpStatusCode.Unauthorized, "Use Index page for authorization ;)");
+            }
+
             try
             {
                 var dishes = _dbService.GetDishes();
@@ -80,7 +85,7 @@ namespace CookMasterApi.Controllers
                     }
                 }
 
-                var formResponse = CookFormManager.Instance.CreateForm(menu, "cookmaster2018@gmail.com");
+                var formResponse = CookFormManager.Instance.CreateForm(menu, string.Join(",",_dbService.GeatEaters().Select(e => e.Email)));
 
                 _dbService.CreateMenu(formResponse.PublishUrl, formResponse.FormId,
                     formResponse.RelationsBetweenIds.Select(x => new Tuple<int, int>(x.Id, x.FormId)).ToList(), DefaultCookerId, DateTime.Now.Date.AddDays(1));
@@ -96,6 +101,11 @@ namespace CookMasterApi.Controllers
         [ActionName("Stat")]
         public HttpResponseMessage Stat(int days)
         {
+            if (!CookFormManager.Instance.IsAuthorized)
+            {
+                return Request.CreateResponse(HttpStatusCode.Unauthorized, "Use Index page for authorization ;)");
+            }
+
             StatResponse response = new StatResponse();
 
             var dishItems = _dbService.GetDishes();

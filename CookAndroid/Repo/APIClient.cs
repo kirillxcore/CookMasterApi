@@ -1,5 +1,10 @@
 ﻿using CookMasterApiModel;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace CookAndroid.Repo
 {
@@ -13,40 +18,23 @@ namespace CookAndroid.Repo
                 Password = password
             };
 
-            // Do something
+            var data = Serialize(request);
 
-            var response = name.Contains("f");
-            return response;
-        }
+            using (var webClient = new HttpClient())
+            {
+                var response = webClient.PostAsync("http://10.195.0.121:61698/cook/login", new StringContent(data, Encoding.UTF8, "application/json")).Result;
+                return response.StatusCode == HttpStatusCode.OK;
+            }
+       }
 
         public static List<DishItem> GetDishes()
         {
-            var request = new DishesResponse();
-
-            // Do something
-
-            var response = new List<DishItem>
+            using (var webClient = new HttpClient())
             {
-                new DishItem
-                {
-                    Name = "Meat",
-                    IsVegan = false,
-                    ImageUrl = "https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
-                },
-                new DishItem
-                {
-                    Name = "Salad",
-                    IsVegan = false,
-                    ImageUrl = "https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
-                },
-                new DishItem
-                {
-                    Name = "Soap",
-                    IsVegan = true,
-                    ImageUrl = "https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
-                }
-            };
-            return response;
+                var response = webClient.PostAsync("http://10.195.0.121:61698/cook/dishes",
+                    new StringContent("", Encoding.UTF8, "application/json")).Result;
+                return Deserialize<DishesResponse>(response.Content.ReadAsStringAsync().Result).Dishes;
+            }
         }
 
         public static bool Publish(List<string> ids)
@@ -56,49 +44,45 @@ namespace CookAndroid.Repo
                 Ids = ids
             };
 
-            // Do something
+            var data = Serialize(request);
 
-            var response = true;
-            return response;
+            using (var webClient = new HttpClient())
+            {
+                var response = webClient.PostAsync("http://10.195.0.121:61698/cook/publish", new StringContent(data, Encoding.UTF8, "application/json")).Result;
+                return response.StatusCode == HttpStatusCode.OK;
+            }
         }
 
         public static List<DishItemStat> Stat(int date)
         {
             var request = date;
 
-            // Do something
-
-            var response = new List<DishItemStat>
+            using (var webClient = new HttpClient())
             {
-                new DishItemStat
-                {
-                    Item = new DishItem{
-                        Name = "Meat",
-                        IsVegan = true,
-                    ImageUrl = "https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
-                    },
-                    Count = 7
-                },
-                new DishItemStat
-                {
-                    Item = new DishItem{
-                        Name = "Salad",
-                        IsVegan = false,
-                    ImageUrl = "https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
-                    },
-                    Count = 3
-                },
-                new DishItemStat
-                {
-                    Item = new DishItem{
-                        Name = "Soap",
-                        IsVegan = false,
-                    ImageUrl = "https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png"
-                    },
-                    Count = 5
-                }
-            };
-            return response;
+                var response = webClient.PostAsync("http://10.195.0.121:61698/cook/stat/" + request,
+                    new StringContent("", Encoding.UTF8, "application/json")).Result;
+                return Deserialize<StatResponse>(response.Content.ReadAsStringAsync().Result).Stat;
+            }
+        }
+
+        private static string Serialize<T>(T request)
+        {
+            var serializer = new JsonSerializer();
+            var sb = new StringBuilder();
+            using (var sw = new StringWriter(sb))
+            {
+                serializer.Serialize(sw, request);
+            }
+            var data = sb.ToString();
+            return data;
+        }
+
+        private static T Deserialize<T>(string request)
+        {
+            var serializer = new JsonSerializer();
+            var reader = new JsonTextReader(new StringReader(request));
+            var data = serializer.Deserialize<T>(reader);
+            return data;
         }
     }
 }

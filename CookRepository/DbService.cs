@@ -24,6 +24,7 @@ namespace CookRepository
                     Id = x.id.ToString(),
                     Name = x.title,
                     ImageUrl = x.image,
+                    ImageUrlAlt = x.image_alt,
                     IsVegan = false,
                     CategoryId = x.category_id,
                     Description = x.description
@@ -116,6 +117,20 @@ SELECT CAST(SCOPE_IDENTITY() as int)";
             {
                 var query = db.Query($"SELECT * FROM DishForm where menu_id = {menuId}");
                 return query.ToDictionary(x => (int) x.form_id, x => (int) x.dish_id);
+            }
+        }
+
+        public List<Eater> GeatEaters()
+        {
+            using (IDbConnection db = new SqlConnection(DatabaseConnectionString))
+            {
+                var query = db.Query("SELECT * FROM Eaters");
+                return query.Select(x => new Eater
+                {
+                     Id = x.id,
+                     Name = x.name,
+                     Email = x.email
+                }).ToList();
             }
         }
     }
