@@ -1,35 +1,86 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Android.Graphics;
-using System.Net;
-using Java.Util;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Android.App;
+using Android.Graphics.Drawables;
+using Android.Widget;
 
 namespace CookAndroid.Repo
 {
     public static class ImageDownloader
     {
-        public static Dictionary<string, Bitmap> cache = new Dictionary<string, Bitmap>();
-
-        public static Bitmap GetImageBitmapFromUrl(string url)
+        public static void SetUrlAsync(this ImageView image, Activity activity, string url, Drawable drawable)
         {
-            if (cache.ContainsKey(url))
+            if (Cache.ContainsKey(url))
             {
-                return cache[url];
+                image.SetImageBitmap(Cache[url]);
+                return;
             }
 
-            Bitmap imageBitmap = null;
-
-            using (var webClient = new WebClient())
+            image.SetImageDrawable(drawable);
+            GetImageBitmapFromUrl(url).ContinueWith((a) =>
             {
-                var imageBytes = webClient.DownloadData(url);
-                if (imageBytes != null && imageBytes.Length > 0)
+                activity.RunOnUiThread(() =>
                 {
-                    imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+                    if (a.Result != null)
+                    {
+                        image.SetImageBitmap(a.Result);
+                    }
+                });
+            });
+        }
+
+        private static readonly Dictionary<string, Bitmap> Cache = new Dictionary<string, Bitmap>();
+
+        private static Task<Bitmap> GetImageBitmapFromUrl(string url)
+        {
+            lock (Cache)
+            {
+                if (Cache.ContainsKey(url))
+                {
+                    return Task.FromResult(Cache[url]);
                 }
             }
 
-            cache[url] = imageBitmap;
+            var webClient = new HttpClient();
+            return webClient.GetByteArrayAsync(url)
+                .ContinueWith(a =>
+                {
+                    try
+                    {
+                        var imageBytes = a.Result;
+                        if (imageBytes != null && imageBytes.Length > 0)
+                        {
+                            var imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+                            lock (Cache)
+                            {
+                                Cache[url] = imageBitmap;
+                            }
+                            return imageBitmap;
+                        }
 
-            return imageBitmap;
+                        return null;
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
+                })
+                .ContinueWith(a =>
+                {
+                    try
+                    {
+                        var result = a.Result;
+                        webClient.Dispose();
+                        return result;
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
+                });
         }
     }
 }

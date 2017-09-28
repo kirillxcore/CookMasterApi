@@ -87,7 +87,7 @@ namespace CookAndroid
                 view.FindViewById<TextView>(Resource.Id.StatItemName).Text = items[position].Name;
                 view.FindViewById<TextView>(Resource.Id.StatItemDescription).Text = items[position].Description;
                 view.FindViewById<TextView>(Resource.Id.StatItemCount).Text = items[position].Count.ToString();
-                view.FindViewById<ImageView>(Resource.Id.StatItemImage).SetImageBitmap(ImageDownloader.GetImageBitmapFromUrl(items[position].ImageUrlAlt));
+                view.FindViewById<ImageView>(Resource.Id.StatItemImage).SetUrlAsync(context, items[position].ImageUrlAlt, context.Resources.GetDrawable(Resource.Drawable.ico));
                 return view;
             }
         }

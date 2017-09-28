@@ -100,7 +100,7 @@ namespace CookAndroid
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemName).Text = items[position].Name;
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemDescription).Text = items[position].Description;
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemIsSelected).Text = items[position].IsSelected ? "X" : "-";
-                view.FindViewById<ImageView>(Resource.Id.CreateMenuItemImage).SetImageBitmap(ImageDownloader.GetImageBitmapFromUrl(items[position].ImageUrlAlt));
+                view.FindViewById<ImageView>(Resource.Id.CreateMenuItemImage).SetUrlAsync(context, items[position].ImageUrlAlt, context.Resources.GetDrawable(Resource.Drawable.ico));
                 return view;
             }
         }
