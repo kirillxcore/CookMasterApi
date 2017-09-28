@@ -1,41 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp">
-
-  <ImageView
-      android:id="@+id/CreateMenuItemImage"
-      android:layout_width="48dp"
-      android:layout_height="48dp"
-      android:padding="5dp"
-      android:src="@drawable/ico" />
-  
-  <LinearLayout
-      android:orientation="vertical"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:paddingLeft="50dip">
-    <TextView
-      android:text="Name"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textSize="20dp"
-      android:id="@+id/CreateMenuItemName" />
-    <TextView
-        android:text="Description"
+    <ImageView
+        android:id="@+id/CreateMenuItemImage"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:padding="5dp"
+        android:src="@drawable/ico" />
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14dp"
-        android:id="@+id/CreateMenuItemDescription" />
-  </LinearLayout>
-  
-  <TextView
-      android:text="selected"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:gravity="right"
-      android:id="@+id/CreateMenuItemIsSelected"
-      android:layout_alignParentRight="true" />
+        android:paddingLeft="66dip">
+        <TextView
+            android:text="Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/CreateMenuItemName" />
+        <TextView
+            android:text="Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:id="@+id/CreateMenuItemDescription" />
+    </LinearLayout>
+    <TextView
+        android:text="selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:id="@+id/CreateMenuItemIsSelected"
+        android:layout_alignParentRight="true" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_below="@id/CreateMenuItemImage"
+        android:id="@+id/space1"
+        android:background="@android:color/darker_gray"
+        android:foreground="@android:color/darker_gray" />
 </RelativeLayout>

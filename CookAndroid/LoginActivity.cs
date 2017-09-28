@@ -38,7 +38,7 @@ namespace CookAndroid
                 var isLoggedIn = APIClient.Login(editLogin.Text, editPassword.Text);
                 if (!isLoggedIn)
                 {
-                    labelError.Text = "Login incorrect.";
+                    labelError.Text = "User name or password is incorrect";
                     return;
                 }
 
