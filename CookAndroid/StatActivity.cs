@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using CookMasterApiModel;
 using Android.Views;
 using System.Linq;
-using Android.Net;
 
 [assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 namespace CookAndroid
@@ -31,9 +30,16 @@ namespace CookAndroid
 
             APIClient.Stat(days).ContinueWith(task =>
             {
+                var result = task.Result;
                 this.RunOnUiThread(() =>
                 {
-                    var items = task.Result.Select(a => new DishWrapper
+                    if (result == null)
+                    {
+                        labelHeader.Text = "Faild to load statistic.";
+                        return;
+                    }
+
+                    var items = result.Select(a => new DishWrapper
                     {
                         Id = a.Item.Id,
                         Count = a.Count,

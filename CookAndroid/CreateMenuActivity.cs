@@ -36,8 +36,15 @@ namespace CookAndroid
 
             APIClient.GetDishes().ContinueWith(task =>
             {
+                var result = task.Result;
                 this.RunOnUiThread(() =>
                 {
+                    if (result == null)
+                    {
+                        labelHeader.Text = "Faild to load dishes.";
+                        return;
+                    }
+
                     this.items = task.Result.Select(a => new DishWrapper
                     {
                         Id = a.Id,
@@ -59,7 +66,21 @@ namespace CookAndroid
 
         private void ButtonSaveMenu_Click(object sender, System.EventArgs e)
         {
-            APIClient.Publish(items.Where(a => a.IsSelected).Select(a => a.Id).ToList());
+            APIClient.Publish(items.Where(a => a.IsSelected).Select(a => a.Id).ToList()).ContinueWith(a =>
+            {
+                var result = a.Result;
+                this.RunOnUiThread(() =>
+                {
+                    if (result)
+                    {
+                        Toast.MakeText(this, "Published succesfully", ToastLength.Short);
+                    }
+                    else
+                    {
+                        Toast.MakeText(this, "Publish failed", ToastLength.Short);
+                    }
+                });
+            });
             this.Finish();
         }
 
