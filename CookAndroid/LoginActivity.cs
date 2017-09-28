@@ -8,7 +8,7 @@ using Android.Content;
 
 namespace CookAndroid
 {
-    [Activity(Label = "Login", Theme = "@android:style/Theme.NoTitleBar", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Icon = "@drawable/logo", Theme = "@android:style/Theme.NoTitleBar", MainLauncher = true)]
     public class LoginActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
