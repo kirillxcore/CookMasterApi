@@ -34,6 +34,7 @@ namespace CookAndroid
                 Id = a.Item.Id,
                 Count = a.Count,
                 ImageUrl = a.Item.ImageUrl,
+                ImageUrlAlt = a.Item.ImageUrlAlt,
                 IsVegan = a.Item.IsVegan,
                 Name = a.Item.Name,
                 CategoryId = a.Item.CategoryId,
@@ -86,7 +87,7 @@ namespace CookAndroid
                 view.FindViewById<TextView>(Resource.Id.StatItemName).Text = items[position].Name;
                 view.FindViewById<TextView>(Resource.Id.StatItemDescription).Text = items[position].Description;
                 view.FindViewById<TextView>(Resource.Id.StatItemCount).Text = items[position].Count.ToString();
-                view.FindViewById<ImageView>(Resource.Id.StatItemImage).SetImageBitmap(ImageDownloader.GetImageBitmapFromUrl(items[position].ImageUrl));
+                view.FindViewById<ImageView>(Resource.Id.StatItemImage).SetImageBitmap(ImageDownloader.GetImageBitmapFromUrl(items[position].ImageUrlAlt));
                 return view;
             }
         }

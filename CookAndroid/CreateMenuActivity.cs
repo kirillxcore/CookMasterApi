@@ -32,6 +32,7 @@ namespace CookAndroid
                 Id = a.Id,
                 IsSelected = false,
                 ImageUrl = a.ImageUrl,
+                ImageUrlAlt = a.ImageUrlAlt,
                 IsVegan = a.IsVegan,
                 Name = a.Name,
                 CategoryId = a.CategoryId,
@@ -99,7 +100,7 @@ namespace CookAndroid
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemName).Text = items[position].Name;
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemDescription).Text = items[position].Description;
                 view.FindViewById<TextView>(Resource.Id.CreateMenuItemIsSelected).Text = items[position].IsSelected ? "X" : "-";
-                view.FindViewById<ImageView>(Resource.Id.CreateMenuItemImage).SetImageBitmap(ImageDownloader.GetImageBitmapFromUrl(items[position].ImageUrl));
+                view.FindViewById<ImageView>(Resource.Id.CreateMenuItemImage).SetImageBitmap(ImageDownloader.GetImageBitmapFromUrl(items[position].ImageUrlAlt));
                 return view;
             }
         }
